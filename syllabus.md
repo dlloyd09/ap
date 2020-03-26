@@ -1,6 +1,6 @@
 # Syllabus
 
-###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/dl/3osf5dq3et1b13i/Syllabus%202019-20.pdf?dl=0)
+###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/1al05u7p2oyjt31/Syllabus%202020-21-v1.pdf?dl=0)
 
 ## Description
 
@@ -9,6 +9,40 @@ CS50 is Harvard University’s introduction to the intellectual enterprises of c
 Among this course’s objectives is to supply students with a comprehensive introduction to the fundamentals of the discipline of computer science. We will do so using programming in several different languages as a vehicle to introduce these fundamentals, including such topics as algorithms, abstraction, data, global impact, and internet technologies. Though the course is programming-heavy, it should be stressed that this is not a “programming course”; rather, this course should be considered one of problem-solving, creativity, and exploration. By year’s end, students will have a richer understanding of the key principles of the discipline of computer science. Students will be able to speak intelligently about how computers work and how they enable us to become better problem-solvers, and will hopefully be able to communicate that knowledge to others.
 
 Whether students elect to take no other computer science courses in their lifetime or consider this class the first step in a longer course of study, it is our sincere hope that they feel more comfortable with—and indeed sometimes skeptical of—the technologies that surround us each day.
+
+## Objectives
+
+### Educational Objectives
+
+Among the overarching goals of this course, independent of its curriculum, are to
+
+- inspire students to explore unfamiliar waters, without fear of failure;
+- create an intensive, shared experience, accessible to all students; and
+- build community among students.
+
+### Learning Objectives
+
+Among the overarching goals for students individually in this course is that they learn something that we haven’t taught them, as is manifest at term’s end by so many students’ final projects that use languages, libraries, tools, and techniques not taught in the course. Along the way will students learn to
+
+- think more methodically;
+- program procedurally;
+- represent and process information;
+- communicate succinctly and precisely;
+- solve problems efficiently;
+- recognize patterns among problems;
+- decompose problems into parts and compose solutions thereto;
+- operate at multiple levels of abstraction;
+- separate design from implementation details;
+- infer from first principles how systems work;
+- assess the correctness, design, and style of code;
+- teach themselves new languages;
+- identify threats to privacy and security;
+- read documentation, drawing conclusions from specifications;
+- test solutions to problems, find faults, and identify corner cases;
+- describe symptoms of problems precisely and ask questions clearly; and
+- identify and quantify tradeoffs among resources, particularly time and space.
+
+Ultimately, the course provides students with a foundation for further studies in computer science and empowers students to apply computer science to problems in other domains.
 
 ## Expectations
 
@@ -55,23 +89,21 @@ ISBN 0-321-84268-5
 ## Overview
 
 Consistent with the AP Computer Science Principles curriculum framework, the course’s material is organized around seven so-called “big ideas” as well as six computational thinking practices. The seven big ideas are:
-1.	Creativity
-2.	Abstraction
-3.	Data and Information
-4.	Algorithms
-5.	Programming
-6.	The Internet
-7.	Global Impact
+1.	Creative Development
+2.	Data
+3.	Algorithms and Programming
+4.  Computer Systems and Networking
+5.  Impact of Computing
 <br>
 
 And the six computational thinking practices are:
 
-* P1. Connecting Computing
-* P2. Creating Computational Artifacts
-* P3. Abstracting
-* P4. Analyzing Problems and Artifacts
-* P5. Communicating (both orally and in writing)
-* P6. Collaborating
+* P1. Computational Solution Design
+* P2. Algorithms and Program Development
+* P3. Abstraction in Program Development
+* P4. Code Analysis
+* P5. Computing Innovations
+* P6. Responsible Computing
 
 ## Curriculum
 
@@ -135,18 +167,17 @@ We present below a recommended ordering of the curriculum and a suggested timeta
 
 1. Understanding Technology (3 weeks)
 2. Chapter 0 (2 weeks)
-3. Performance Task 1: Explore (2 weeks)
-4. Chapter 1 (4 weeks)
-5. Chapter 2 (3 weeks)
-6. Chapter 3 (4 weeks)
-7. Chapter 4 (2 weeks)
-8. Data Science (1 week)
-9. Chapter 5 (3 weeks)
-10. Chapter 6 (3 weeks)
-11. Chapter 7 (3 weeks)
-12. Chapter 8 (2 weeks)
-13. Performance Task 2: Create (3 weeks)
-12. Impact of Computing (1 week)
+3. Chapter 1 (4 weeks)
+4. Chapter 2 (3 weeks)
+5. Chapter 3 (4 weeks)
+6. Chapter 4 (3 weeks)
+7. Data Science (1 week)
+8. Chapter 5 (3 weeks)
+9. Chapter 6 (3 weeks)
+10. Chapter 7 (3 weeks)
+11. Chapter 8 (2 weeks)
+12. Performance Task: Create (3 weeks)
+13. Impact of Computing (2 week)
 
 ## Academic Honesty
 
