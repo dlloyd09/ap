@@ -32,7 +32,8 @@
   * [Images](https://ap.cs50.school/assets/pdfs/images.pdf)
   * [Structures and Encapsulation](https://ap.cs50.school/assets/pdfs/structures_and_encapsulation.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program Functionality
+  * 3.b – List Values
+  * 3.c – Iteration
+  * 3.d – Testing Inputs
