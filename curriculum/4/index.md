@@ -17,7 +17,7 @@
   * [ZIP](https://cdn.cs50.net/2018/fall/lectures/4/src4.zip)
 * [Video](https://video.cs50.net/2018/fall/lectures/4)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program Purpose
+  * 3.b – Manage Complexity with Lists
+  * 3.c – Procedures with Parameters  
