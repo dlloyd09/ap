@@ -20,10 +20,10 @@
   * [MVC](https://ap.cs50.school/assets/pdfs/mvc.pdf)
   * [Python for Web Programming](https://ap.cs50.school/assets/pdfs/python_for_web_programming.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program Purpose
+  * 3.b – Use of Lists
+  * 3.d – Testing Inputs
 
 * Review for AP Exam
   * review practice problems from previous AP CSP Exams on [AP Central](https://myap.collegeboard.org/login)
