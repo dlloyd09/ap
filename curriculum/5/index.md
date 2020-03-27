@@ -30,7 +30,4 @@
   * [JavaScript](https://ap.cs50.school/assets/pdfs/javascript.pdf)
   * [TCP and IP](https://ap.cs50.school/assets/pdfs/tcp_and_ip.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+
