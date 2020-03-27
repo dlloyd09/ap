@@ -32,7 +32,8 @@
   * [Syntax](https://ap.cs50.school/assets/pdfs/syntax.pdf)
   * [Variables](https://ap.cs50.school/assets/pdfs/variables.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program with Input and Output
+  * 3.b – Use of Variables
+  * 3.c – Sequencing
+  * 3.d – Testing Selection
