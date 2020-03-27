@@ -18,7 +18,6 @@
   * [Pseudocode](https://ap.cs50.school/assets/pdfs/pseudocode.pdf)
   * [Scratch](https://ap.cs50.school/assets/pdfs/scratch.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program Function and Purpose
+  * 3.c – Procedures without Parameters
