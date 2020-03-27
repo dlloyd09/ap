@@ -43,7 +43,8 @@
   * [Selection Sort](https://ap.cs50.school/assets/pdfs/selection_sort.pdf)
   * [Typecasting](https://ap.cs50.school/assets/pdfs/typecasting.pdf)
 
-* After completion of this chapter, teachers can assign:
-  * topic questions #xyz
-  * ...
-  * ...
+* After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+  * 3.a – Program with Output
+  * 3.b – Value of Variables
+  * 3.c – Selection
+  * 3.d – Testing Procedures
