@@ -1,6 +1,6 @@
 # Syllabus
 
-###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/1al05u7p2oyjt31/Syllabus%202020-21-v1.pdf?dl=0)
+###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/7w9p030xhpmy115/Syllabus%202020-21-v2.pdf?dl=0)
 
 ## Description
 
@@ -88,7 +88,7 @@ ISBN 0-321-84268-5
 
 ## Overview
 
-Consistent with the AP Computer Science Principles curriculum framework, the course’s material is organized around seven so-called “big ideas” as well as six computational thinking practices. The seven big ideas are:
+Consistent with the AP Computer Science Principles curriculum framework, the course’s material is organized around five so-called “big ideas” as well as six computational thinking practices. The five big ideas are:
 1.	Creative Development
 2.	Data
 3.	Algorithms and Programming
