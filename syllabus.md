@@ -1,6 +1,6 @@
 # Syllabus
 
-###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/7w9p030xhpmy115/Syllabus%202020-21-v2.pdf?dl=0)
+###### [Download the full syllabus as a PDF with mappings to the AP CSP Framework's Learning Objectives](https://www.dropbox.com/s/6twwf4kypl0w20h/Syllabus%202020-21-v3.pdf?dl=0)
 
 ## Description
 
@@ -46,7 +46,7 @@ Ultimately, the course provides students with a foundation for further studies i
 
 ## Expectations
 
-Students are expected to submit all problems! If students would like to receive AP credit they will need to take the [AP CSP Exam](https://apcentral.collegeboard.org/courses/ap-computer-science-principles/exam) and complete the [Create and Explore Tasks](https://apcentral.collegeboard.org/pdf/ap-csp-student-task-directions.pdf).
+Students are expected to submit all problems! If students would like to receive AP credit they will need to take the [AP CSP Exam](https://apcentral.collegeboard.org/courses/ap-computer-science-principles/exam) and complete the [Create Performance Task](https://apcentral.collegeboard.org/pdf/ap-csp-student-task-directions.pdf).
 
 ## Prerequisites
 
@@ -86,14 +86,24 @@ Henry S. Warren Jr.
 Pearson Education, 2013  
 ISBN 0-321-84268-5  
 
+## PROGRAMMING ENVIRONMENTS
+
+Several programming languages are taught in the course, and students are able to program in all of them in an environment designed specifically for the course called CS50 IDE. Students will need to sign up for a (free) GitHub (https://github.com/join) account in order to use CS50 IDE.
+<br>
+
+[CS50 IDE](https://ide.cs50.io/) is a web-based utility (hosted on a platform known as AWS Cloud9) with cloud storage, meaning students will be able to work on the course’s programming exercises at home, school, or anywhere they have an internet connection. Instructions for setting up and using CS50 IDE are provided in the first assignment requiring its use. The CS50 IDE will work on PCs, Macs, Chromebooks, and tablets. The current version of the CS50 IDE can also work on Apple iPads.
+<br>
+
+Additionally, students will use a drag-and-drop programming language called Scratch for some of the course’s early material. Scratch is similarly a web-based environment, and it can be accessed by visiting https://scratch.mit.edu/.
+
 ## Overview
 
 Consistent with the AP Computer Science Principles curriculum framework, the course’s material is organized around five so-called “big ideas” as well as six computational thinking practices. The five big ideas are:
-1.	Creative Development
-2.	Data
-3.	Algorithms and Programming
-4.  Computer Systems and Networking
-5.  Impact of Computing
+1.	Creative Development (CRD)
+2.	Data (DAT)
+3.	Algorithms and Programming (AAP)
+4.  Computing Systems and Networks (CSN)
+5.  Impact of Computing (IOC)
 <br>
 
 And the six computational thinking practices are:
@@ -176,7 +186,7 @@ We present below a recommended ordering of the curriculum and a suggested timeta
 9. Chapter 6 (3 weeks)
 10. Chapter 7 (3 weeks)
 11. Chapter 8 (2 weeks)
-12. Performance Task: Create (3 weeks)
+12. Create Performance Task (3 weeks)
 13. Impact of Computing (2 week)
 
 ## Academic Honesty
