@@ -3,7 +3,8 @@
 * [Notes](notes)
 * Problem
   * [Scratch](https://docs.cs50.net/2019/ap/problems/scratch/scratch.html)
-  * Be sure to also review the Create Task [requirements](https://apcentral.collegeboard.org/pdf/ap-csp-student-task-directions.pdf?course=ap-computer-science-principles).
+* AP Exam Preparation
+  * Be sure to review the Create Performance Task [requirements](https://apcentral.collegeboard.org/pdf/ap-csp-student-task-directions.pdf?course=ap-computer-science-principles).
   * Practice writing responses to the writing prompts in the requirements above.
 * [Slides](https://cdn.cs50.net/2018/fall/lectures/0/lecture0.pdf)
 * Source Code from Lecture
