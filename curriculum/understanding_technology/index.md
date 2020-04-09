@@ -14,3 +14,6 @@
   * [Transistors and Logic](https://ap.cs50.school/assets/pdfs/transistors_and_logic.pdf)
   * [Trust Models](https://ap.cs50.school/assets/pdfs/trust_models.pdf)
   * [Virtual and Augmented Reality](https://ap.cs50.school/assets/pdfs/virtual_and_augmented_reality.pdf)
+* AP Exam Preparation
+  * Teachers are encouraged to assign, in conjunction with any of the assignments in this chapter, some prior multiple choice AP exam questions found on [AP Central](https://myap.collegeboard.org/login) that cover similar topics and to discuss and review those questions with students.  
+  
