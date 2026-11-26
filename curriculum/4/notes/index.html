@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Lecture 4">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Lecture 4</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="lecture-4">Lecture 4</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#tools-for-debugging" id="markdown-toc-tools-for-debugging">Tools for debugging</a></li>
+  <li><a href="#valgrind" id="markdown-toc-valgrind"><code class="language-plaintext highlighter-rouge">valgrind</code></a></li>
+  <li><a href="#other-debugging-methods" id="markdown-toc-other-debugging-methods">Other debugging methods</a></li>
+  <li><a href="#more-from-last-week" id="markdown-toc-more-from-last-week">More from last week</a></li>
+  <li><a href="#structs" id="markdown-toc-structs">Structs</a></li>
+  <li><a href="#linked-lists" id="markdown-toc-linked-lists">Linked Lists</a></li>
+  <li><a href="#more-data-structures" id="markdown-toc-more-data-structures">More data structures</a></li>
+</ul>
+
+<h2 id="tools-for-debugging">Tools for debugging</h2>
+
+<ul>
+  <li>We took a look at CS50 IDE, a new web-based programming environment. We learned to use:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">check50</code> to check our work automatically</li>
+      <li><code class="language-plaintext highlighter-rouge">debug50</code> and the debugger to step through our code</li>
+      <li><code class="language-plaintext highlighter-rouge">help50</code> to make compilation errors more understandable</li>
+      <li><code class="language-plaintext highlighter-rouge">printf</code> to print out helpful information as our program runs</li>
+      <li><code class="language-plaintext highlighter-rouge">style50</code> to check the style of our code</li>
+    </ul>
+  </li>
+  <li>We also looked at how memory is used by our programs in C, and how we can allocate and free memory.</li>
+</ul>
+
+<h2 id="valgrind"><code class="language-plaintext highlighter-rouge">valgrind</code></h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">valgrind</code> is a command-line tool that we can use to run our program and see if it has any memory leaks.
+    <ul>
+      <li>Recall that a memory leak happens when we call <code class="language-plaintext highlighter-rouge">malloc</code> to ask the operating system for memory for our program, but we don’t call <code class="language-plaintext highlighter-rouge">free</code> to mark it as free. Then, our program will use more and more memory as it runs, eventually slowing down or even crashing our entire computer.</li>
+    </ul>
+  </li>
+  <li>Let’s write a program called <code class="language-plaintext highlighter-rouge">memory.c</code> to experiment a little bit:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">f</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We have a function, <code class="language-plaintext highlighter-rouge">f</code>, that allocates memory for 10 integers, and using <code class="language-plaintext highlighter-rouge">x</code> as a pointer to the address of the start of that memory. Then, we try to access the 11th integer with <code class="language-plaintext highlighter-rouge">x[10]</code> (remember that pointers can act like arrays, since the memory we get is contiguous, or back-to-back).</li>
+      <li>When we run this program, we can see that it still works. It turns out, <code class="language-plaintext highlighter-rouge">malloc</code> sometimes (but not always) gives us back a little more memory than we ask for, and we might get lucky and be able to access and use memory beyond the bounds of what we should have.</li>
+    </ul>
+  </li>
+  <li>We can run our program with <code class="language-plaintext highlighter-rouge">valgrind ./memory</code>, and we see a lot printed out. But we do see one error message in particular, <code class="language-plaintext highlighter-rouge">Invalid read of size 4</code>, followed by some pointers in hexadecimal. We see <code class="language-plaintext highlighter-rouge">f (memory.c:15)</code> in the line immediately after, which tells us that this happened in line 15 of <code class="language-plaintext highlighter-rouge">memory.c</code> in the function <code class="language-plaintext highlighter-rouge">f</code>.</li>
+  <li>We can also use <code class="language-plaintext highlighter-rouge">help50 valgrind ./memory</code>, which will distill the output for us, one error message at a time, and add additional clues to guide us.</li>
+  <li>If we fix our program to access <code class="language-plaintext highlighter-rouge">x[9]</code>, then <code class="language-plaintext highlighter-rouge">valgrind</code> onluy has 1 error message for us: <code class="language-plaintext highlighter-rouge">40 bytes in 1 blocks are definitely lost...</code>. And <code class="language-plaintext highlighter-rouge">help50</code> tells us that we forgot to free memory we allocated with <code class="language-plaintext highlighter-rouge">malloc</code>, so we should call <code class="language-plaintext highlighter-rouge">free(x)</code> after we’re doing using it. Now, we have 0 errors.</li>
+  <li>Recall that we have some finite number of bytes in memory, and our operating system keeps track of which bytes are used by which program, which bytes are free, and indicates segmentation faults when we try to access memory that isn’t allocated to our program.</li>
+</ul>
+
+<h2 id="other-debugging-methods">Other debugging methods</h2>
+
+<ul>
+  <li>Rubber duck debugging is the process of explaining our code, step-by-step, to a rubber duck (or some other inanimate object), so we ourselves can understand it better and hopefully realize where we might have a bug or opportunity of improvement. Hopefully, this will be another simple, but powerful, tool for us to use.</li>
+  <li>Hand tracing is the process of simulating the execution of code by evaluating the value of every variable, line by line, to see if it produces the expected output.</li>
+  <li>Visualizations too, can provide some insight into the processes occurring in your code to help you track down bugs, albeit more visually.</li>
+</ul>
+
+<h2 id="more-from-last-week">More from last week</h2>
+
+<ul>
+  <li>We learned, last week, that a <code class="language-plaintext highlighter-rouge">string</code> is a synonym for <code class="language-plaintext highlighter-rouge">char *</code>, a pointer to a character.</li>
+  <li>We also learned that memory is laid out in a certain way for our program, where different regions are used to store different types of data, such as:
+    <ul>
+      <li>the text segment, where the machine code for our program is loaded when we start it</li>
+      <li>the heap, where dynamically allocated memory (memory we allocate when the program is running), stores</li>
+      <li>the stack, where local variables and functions, including our <code class="language-plaintext highlighter-rouge">main</code> function, live when our program is running</li>
+    </ul>
+  </li>
+  <li>We saw a <code class="language-plaintext highlighter-rouge">swap</code> function that didn’t work, when values were passed in directly, since it got its own copies of those values. Then, we saw a <code class="language-plaintext highlighter-rouge">swap</code> function that took in the addresses of two variables, so those values could actually be swapped.</li>
+  <li>Binky, from the short clip we saw, also demonstrated how we could dereference pointers and use them correctly (and incorrectly). We need to make sure that our pointers have a valid address, before we try to dereference them.</li>
+  <li>Finally, we saw an introduction to structs, where we can build our own data structures, with variables of our choice.</li>
+</ul>
+
+<h2 id="structs">Structs</h2>
+
+<ul>
+  <li>Let’s make a file called <code class="language-plaintext highlighter-rouge">struct.h</code>:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">dorm</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">student</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>This is a header file, which we can share among various <code class="language-plaintext highlighter-rouge">.c</code> files.</li>
+    </ul>
+  </li>
+  <li>In <code class="language-plaintext highlighter-rouge">struct0.c</code>, we import the header file:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cs50.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">"struct.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Allocate space for students</span>
+    <span class="kt">int</span> <span class="n">enrollment</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"Enrollment: "</span><span class="p">);</span>
+    <span class="n">student</span> <span class="n">students</span><span class="p">[</span><span class="n">enrollment</span><span class="p">];</span>
+
+    <span class="c1">// Prompt for students' names and dorms</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">enrollment</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"Name: "</span><span class="p">);</span>
+        <span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">dorm</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"Dorm: "</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Print students' names and dorms</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">enrollment</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s is in %s.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">dorm</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Notice now that we have a <code class="language-plaintext highlighter-rouge">student</code> type, and an array called <code class="language-plaintext highlighter-rouge">students</code> with structs of that type.</li>
+      <li>Then, we can access variables inside each <code class="language-plaintext highlighter-rouge">student</code> struct with the <code class="language-plaintext highlighter-rouge">.</code> notation.</li>
+      <li>A <code class="language-plaintext highlighter-rouge">student</code> is like an abstraction, where we encapsulate some variables together.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="linked-lists">Linked Lists</h2>
+
+<ul>
+  <li>So far, arrays had to be a fixed size at the time of initialization. If we wanted to add to our array, we would have to initialize a bigger array, and copy the values from the original array. But the running time of resizing an array is now <em>O</em>(<em>n</em>), where <em>n</em> is the size of the original array.</li>
+  <li>We can use a function called <code class="language-plaintext highlighter-rouge">realloc</code>, which reallocates memory. We can pass in the address of our memory and the new amount we want, and our operating system will return a new address, where we have that much contiguous memory. It will also copy the array for us to the new location. But this operation will cost a linear amount of time, too, depending on how big our array is.</li>
+  <li>We can do the opposite, and ask for just enough memory for one element, like one integer, at a time. But they might be stored anywhere in the heap, so we need a way to link each element to the next, via a stored pointer.</li>
+  <li>With this data structure, called a linked list, we lose the ability to randomly access elements. For example, we can no longer access the 5th element of the list by calculating where it is, in constant time. (Since we know arrays store elements back-to-back, we can add 1, or 4, or the size of our element, to calculate addresses.) Instead, we have to follow each element, one at a time.</li>
+  <li>And we create a linked list by allocating, for each element, enough memory for both the value, and a pointer to the next element. We’ll call these nodes:<br />
+<img src="/curriculum/4/notes/linked_list.png" alt="linked list with node at address 100 with value 42 and pointer to address 475, which has value 50 and pointer to address 150, which has value 13 and pointer to NULL" />
+    <ul>
+      <li>We have three nodes at various addresses in memory, <code class="language-plaintext highlighter-rouge">100</code>, <code class="language-plaintext highlighter-rouge">150</code>, and <code class="language-plaintext highlighter-rouge">475</code>. Each node has the value we want to store, and also a pointer to the next node. The final node has a pointer of <code class="language-plaintext highlighter-rouge">NULL</code>, indicating the end of our linked list.</li>
+    </ul>
+  </li>
+  <li>In code, we might create our own struct called <code class="language-plaintext highlighter-rouge">node</code>, with an <code class="language-plaintext highlighter-rouge">int</code> and a pointer to the next <code class="language-plaintext highlighter-rouge">node</code> called <code class="language-plaintext highlighter-rouge">next</code>:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">node</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We start this struct with <code class="language-plaintext highlighter-rouge">typedef struct node</code> so that we can refer to a <code class="language-plaintext highlighter-rouge">node</code> inside our struct.</li>
+    </ul>
+  </li>
+  <li>With some volunteers, we demonstrate how a linked list works. To store 3 values, we need 3 nodes, and a pointer, that we labeled “first”, pointing to the first node. Each node holds a value, along with a pointer to the next node. And to add a node, we would allocate memory for a new node, and change our pointers carefully. First, we need to find the next node that will follow the new node (if we want to keep our linked list sorted). Then, our new node will point to the next node, and change the node before it to point to the new node. And to find the right place for inserting a new node, we have to start with our “first” pointer, and look at the values of each node as we follow the pointers in them.</li>
+  <li>The running time of inserting a node, now, is <em>O</em>(<em>n</em>), since we have to follow each node to check their values. There’s more logic and running time, but we don’t need to decide on a fixed size for our list now. And if we were to insert nodes in unsorted order, the running time would be <em>O</em>(1), since we can just add it to the front of the list. We can also keep an additional pointer to the last node, calling it “last”, or we can even have each node store two pointers, one to the previous node and one to the next node, so we can move forwards and backwards.</li>
+  <li>Let’s see how we might do this in code. First, we can store a fixed number of integers in an array:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cs50.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Prompt for number of numbers</span>
+    <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">capacity</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"Capacity: "</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">// Memory for numbers</span>
+    <span class="kt">int</span> <span class="n">numbers</span><span class="p">[</span><span class="n">capacity</span><span class="p">];</span>
+
+    <span class="c1">// Prompt for numbers</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">capacity</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Prompt for number</span>
+        <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"Number: "</span><span class="p">);</span>
+
+        <span class="c1">// Add to list</span>
+        <span class="n">numbers</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+        <span class="n">size</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Print numbers</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We get a <code class="language-plaintext highlighter-rouge">capacity</code> from the user, and create an array of size <code class="language-plaintext highlighter-rouge">capacity</code>. Then, we keep adding numbers to the array, until we reach the capacity. Then, we print each number in the array.</li>
+      <li>But our program is limited to a capacity we choose initially.</li>
+    </ul>
+  </li>
+  <li>We can size an array dynamically:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cs50.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Memory for numbers</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">numbers</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// Prompt for numbers (until EOF)</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Prompt for number</span>
+        <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"Number: "</span><span class="p">);</span>
+
+        <span class="c1">// Check for EOF</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Check whether enough space for number</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">capacity</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Allocate space for number</span>
+            <span class="kt">int</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="n">realloc</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">free</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">numbers</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+            <span class="n">capacity</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Add number to list</span>
+        <span class="n">numbers</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+        <span class="n">size</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Print numbers</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Free memory</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We get one number at a time,</li>
+      <li>First, we initialize a pointer called <code class="language-plaintext highlighter-rouge">numbers</code>, but we don’t initialize it yet. We track the <code class="language-plaintext highlighter-rouge">capacity</code> of our array, as well as the <code class="language-plaintext highlighter-rouge">size</code> of the array so far.</li>
+      <li>Then, we get one number at a time from the user. <code class="language-plaintext highlighter-rouge">get_int</code> will return <code class="language-plaintext highlighter-rouge">INT_MAX</code> if we indicate EOF, or “end of file” as the end to our input (control + d in the terminal), so if that happens, we can <code class="language-plaintext highlighter-rouge">break</code> out of the loop.</li>
+      <li>If we’ve reached our <code class="language-plaintext highlighter-rouge">capacity</code> for the <code class="language-plaintext highlighter-rouge">numbers</code> array, we use <code class="language-plaintext highlighter-rouge">realloc</code> to reallocate enough space for an additional integer in the array. We check that <code class="language-plaintext highlighter-rouge">realloc</code> returned a pointer that isn’t null, and if not, <code class="language-plaintext highlighter-rouge">free</code> the existing <code class="language-plaintext highlighter-rouge">numbers</code> array if we have one, and <code class="language-plaintext highlighter-rouge">return 1</code>. If we do get enough space, then we can add the new number to the array.</li>
+      <li>Finally, we can print each number in the array, and free the array. If not, running <code class="language-plaintext highlighter-rouge">valgrind ./list1</code> will show us an error.</li>
+    </ul>
+  </li>
+  <li>Now let’s write the same program, using a linked list:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;cs50.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">node</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Memory for numbers</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">numbers</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="c1">// Prompt for numbers (until EOF)</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Prompt for number</span>
+        <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"number: "</span><span class="p">);</span>
+
+        <span class="c1">// Check for EOF</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>The beginning of our program is essentially the same, though we define <code class="language-plaintext highlighter-rouge">node</code> at the top of this program.
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="c1">// Allocate space for number</span>
+     <span class="n">node</span> <span class="o">*</span><span class="n">n</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">node</span><span class="p">));</span>
+     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="p">)</span>
+     <span class="p">{</span>
+         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+     <span class="p">}</span>
+
+     <span class="c1">// Add number to list</span>
+     <span class="n">n</span><span class="o">-&gt;</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+     <span class="n">n</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+     <span class="p">{</span>
+         <span class="k">for</span> <span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">;</span> <span class="n">ptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+         <span class="p">{</span>
+             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+             <span class="p">{</span>
+                 <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+                 <span class="k">break</span><span class="p">;</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">else</span>
+     <span class="p">{</span>
+         <span class="n">numbers</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+     <span class="p">}</span>
+ <span class="err">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Now, we allocate enough memory for a new node and point to it with a pointer <code class="language-plaintext highlighter-rouge">n</code>. If <code class="language-plaintext highlighter-rouge">n</code> was null after we called <code class="language-plaintext highlighter-rouge">malloc</code>, then we exit with an error. With the <code class="language-plaintext highlighter-rouge">-&gt;</code> syntax, we can follow a pointer to get a variable in a struct, so we store the new number into the node <code class="language-plaintext highlighter-rouge">n</code> points to, along with <code class="language-plaintext highlighter-rouge">NULL</code> for the <code class="language-plaintext highlighter-rouge">next</code> pointer. (If <code class="language-plaintext highlighter-rouge">n</code> was a node and not a pointer, we would use the <code class="language-plaintext highlighter-rouge">n.number</code> syntax.)</li>
+      <li>Then, if <code class="language-plaintext highlighter-rouge">numbers</code> is a pointer, we create a temporary pointer <code class="language-plaintext highlighter-rouge">ptr</code> to follow our linked list. We start with <code class="language-plaintext highlighter-rouge">ptr = numbers</code>. Inside our loop, if <code class="language-plaintext highlighter-rouge">ptr</code> doesn’t have a <code class="language-plaintext highlighter-rouge">next</code> pointer (i.e. it’s the last node in our linked list), we set the <code class="language-plaintext highlighter-rouge">next</code> pointer to <code class="language-plaintext highlighter-rouge">n</code> and break. Otherwise, our loop continues, and our temporary pointer <code class="language-plaintext highlighter-rouge">ptr</code> becomes <code class="language-plaintext highlighter-rouge">ptr-&gt;next</code>, i.e. we look at the next node.</li>
+      <li>If we didn’t have an existing <code class="language-plaintext highlighter-rouge">numbers</code> pointer, we can just set it to <code class="language-plaintext highlighter-rouge">n</code>, or the start of our new list.
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Print numbers</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">;</span> <span class="n">ptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">number</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Free memory</span>
+  <span class="n">node</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="n">node</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+      <span class="n">ptr</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Finally, we print the numbers by following the linked list in the same way, and we also free each node as we follow its <code class="language-plaintext highlighter-rouge">next</code> pointer.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="more-data-structures">More data structures</h2>
+
+<ul>
+  <li>If we had an unsorted array or linked list storing names, we would have to look through each value, one at a time.</li>
+  <li>We, as humans, might make smaller lists where each person whose name starts with “A” will be in one list, “B” in another, and so on. We can represent this concept with a <em>hash table</em>, where each value to be stored is <em>hashed</em> by a <em>hash function</em>. The resulting <em>hash</em> might be a number, and in this case might be <code class="language-plaintext highlighter-rouge">0</code> for a string that starts with <code class="language-plaintext highlighter-rouge">A</code>, <code class="language-plaintext highlighter-rouge">1</code> for a string that starts with <code class="language-plaintext highlighter-rouge">B</code>, and so on, but the important part is that we can use that number to index into some array. The array, in turn, will have a linked list for each letter of the alphabet (or more generally, a linked list for each <em>bucket</em>), and so this data structure is called a hash table.
+    <ul>
+      <li>Now, each linked list (in our example of strings) will only be, on average, 1/26th the size of a list with all the strings together. In the worst case, all the strings will end up in the same bucket (if they happen to start with the same letter), and we would have <em>O</em>(<em>n</em>) running time, like an unsorted array. We can also use a different hash function, which might distribute our elements more evenly. But in the real world, our running time is likely to be much lower with a hash table. And we can even have more buckets in our hash table, so each list is an even smaller proportion.</li>
+    </ul>
+  </li>
+  <li>A <em>tree</em> is another data structure where each node points to two other nodes, one to the left (with a smaller value) and one to the right (with a larger value):<br />
+<img src="/curriculum/4/notes/tree.png" alt="tree with node 55 at top center, left arrow to 33 below, right arrow to 77 below; 33 has left arrow to 22 below, right arrow to 44 below; 77 has left arrow to 66 below, right arrow to 88 below" />
+    <ul>
+      <li>Now, we can easily do binary search, and since each node is pointing to another, we can also insert nodes into the tree without moving all of them around as we would have to in an array. Recursively searching this tree would look something like:
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">node</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">bool</span> <span class="nf">search</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">node</span> <span class="o">*</span><span class="n">tree</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">tree</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>We can use another data structure called a <em>trie</em> (pronounced like “try”, and is short for “retrieval”):<br />
+<img src="/curriculum/4/notes/trie.png" alt="array with blanks, and letters M, P, T; each letter points to another array, with blanks, and some letters that each point to other arrays and letters in them" />
+    <ul>
+      <li>Imagine we want to store a dictionary of words efficiently, and be able to access each one in constant time. A trie is like a tree, but each node is an array. Each array will have each letter, A-Z, stored. For each word, the first letter will point to an array, where the next valid letter will point to another array, and so on, until we reach something indicating the end of a valid word. If our word isn’t in the trie, then one of the arrays won’t have a pointer or terminating character for our word.</li>
+    </ul>
+  </li>
+  <li>In our upcoming problem set, we’ll use what we’ve learned about pointers and data structures to implement a spell-checking program, and gain an understanding of how something that might work at a low level.</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

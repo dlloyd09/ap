@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Chapter 3">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Chapter 3</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 id="chapter-3">Chapter 3</h1>
+
+<ul>
+  <li>Clips
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=i3gv2zOmJiA">CSI Zoom Enhance</a></li>
+      <li><a href="https://www.youtube.com/watch?v=17MctJPzR8w">Let’s Enhance</a></li>
+      <li><a href="https://www.youtube.com/watch?v=_d0jFalGxnQ">Pointer Fun with Binky</a></li>
+    </ul>
+  </li>
+  <li><a href="notes">Notes</a></li>
+  <li>Problems
+    <ul>
+      <li><a href="https://docs.cs50.net/2019/ap/problems/fifteen/fifteen.html">Fifteen</a></li>
+      <li><a href="https://docs.cs50.net/2019/ap/problems/whodunit/whodunit.html">Whodunit</a></li>
+      <li><a href="https://docs.cs50.net/2019/ap/problems/resize/less/resize.html">Resize (less comfy)</a> or <a href="https://docs.cs50.net/2019/ap/problems/resize/more/resize.html">Resize (more comfy)</a></li>
+      <li><a href="https://docs.cs50.net/2019/ap/problems/recover/recover.html">Recover</a></li>
+    </ul>
+  </li>
+  <li>Shorts
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=aCPkszeKRa4">Call Stacks</a></li>
+      <li><a href="https://www.youtube.com/watch?v=xa4ugmMDhiE">Dynamic Memory Allocation</a></li>
+      <li><a href="https://www.youtube.com/watch?v=-BNy3eEBGt0">File Pointers</a></li>
+      <li><a href="https://www.youtube.com/watch?v=8okwMK6htKE">Hexadecimal</a></li>
+      <li><a href="https://www.youtube.com/watch?v=8VAhORT0ZW8">Pointers</a></li>
+      <li><a href="https://www.youtube.com/watch?v=nrXIMgInokU">Recursion</a></li>
+    </ul>
+  </li>
+  <li><a href="https://cdn.cs50.net/2018/fall/lectures/3/lecture3.pdf">Slides</a></li>
+  <li>Source Code
+    <ul>
+      <li><a href="https://github.com/cs50/libcs50/tree/develop/src">CS50 Library</a></li>
+      <li><a href="https://cdn.cs50.net/2018/fall/lectures/3/src3/">Index</a></li>
+      <li><a href="https://cdn.cs50.net/2018/fall/lectures/3/src3.pdf">PDF</a></li>
+      <li><a href="https://sandbox.cs50.io/13f78b0a-70db-4dc3-90f5-87164e38d431">Sandbox</a></li>
+      <li><a href="https://cdn.cs50.net/2018/fall/lectures/3/src3.zip">ZIP</a></li>
+    </ul>
+  </li>
+  <li><a href="https://video.cs50.net/2018/fall/lectures/3/">Video</a></li>
+  <li>Reference Sheets
+    <ul>
+      <li><a href="https://ap.cs50.school/assets/pdfs/bugs_and_debugging.pdf">Bugs and Debugging</a></li>
+      <li><a href="https://ap.cs50.school/assets/pdfs/file_io.pdf">File I/O</a></li>
+      <li><a href="https://ap.cs50.school/assets/pdfs/hexadecimal.pdf">Hexadecimal</a></li>
+      <li><a href="https://ap.cs50.school/assets/pdfs/images.pdf">Images</a></li>
+      <li><a href="https://ap.cs50.school/assets/pdfs/structures_and_encapsulation.pdf">Structures and Encapsulation</a></li>
+    </ul>
+  </li>
+  <li>After completion of this chapter, teachers may assign and complete the following Topic Questions on AP Classroom:
+    <ul>
+      <li>3.a – Program Functionality</li>
+      <li>3.b – List Values</li>
+      <li>3.c – Iteration</li>
+      <li>3.d – Testing Inputs</li>
+    </ul>
+  </li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

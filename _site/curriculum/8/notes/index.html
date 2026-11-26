@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Lecture 8">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Lecture 8</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="lecture-8">Lecture 8</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#last-time-and-next-time" id="markdown-toc-last-time-and-next-time">Last time (and next time)</a></li>
+  <li><a href="#logging-in" id="markdown-toc-logging-in">Logging in</a></li>
+  <li><a href="#databases" id="markdown-toc-databases">Databases</a></li>
+  <li><a href="#sqlite" id="markdown-toc-sqlite">SQLite</a></li>
+  <li><a href="#sql" id="markdown-toc-sql">SQL</a></li>
+  <li><a href="#lecturedb" id="markdown-toc-lecturedb">lecture.db</a></li>
+  <li><a href="#problems" id="markdown-toc-problems">Problems</a></li>
+</ul>
+
+<h2 id="last-time-and-next-time">Last time (and next time)</h2>
+
+<ul>
+  <li>We’ve been introduced to web programming, where we’ve learned to use Flask, a framework written in the language of Python, to build dynamic web-based applications.</li>
+  <li>The internal structure of our applications have followed a paradigm, or methodology, called MVC, Model-View-Controller, where code used for different functions are organized in different files and folders, and interact with each other in predictable ways.</li>
+  <li>But until now, we haven’t had much code in our Model layer. We’ve used CSVs to read and write data, but those rows of text are a bit clunky to work with.</li>
+  <li>CS50 Finance will use a database language, SQL, to work with data more efficiently. It will also use a real third-party API, application programming interface (specifications for how the procedures in a library behave and can be used), to get real-time data on stock prices, allowing users to “buy” and “sell” virtual stocks. We’ll be able to access the API’s functions by reading its documentation. Documentation for an API/library is necessary in understanding the behavior(s) provided by the API/library and how to use them.</li>
+</ul>
+
+<h2 id="logging-in">Logging in</h2>
+
+<ul>
+  <li>When we log in to a website, with our username and password, we’re not prompted to log in again for each page we visit after, usually until we explicitly log out.</li>
+  <li>It turns out that there is another web technology called <strong>cookies</strong>, small pieces of data that a website can ask a browser to store on a user’s computer. Then, when the browser visits that website again, it will automatically send that cookie back, like a virtual handstamp that identifies ourself to the server, without having to enter our login information again. The cookie might store a long random string, to prevent adversaries from easily guessing it, and the server will remember that it corresponds to our account.</li>
+  <li>When we visit a site like Gmail for the first time, our browser will send HTTP headers like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: gmail.com
+...
+</code></pre></div>    </div>
+  </li>
+  <li>Then, Gmail’s server will reply with the login page. After we successfully log in, Gmail’s server will then reply with headers like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Content-Type: text/html
+Set-Cookie: session=value
+...
+</code></pre></div>    </div>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">Set-Cookie</code> header asks our browser to save the <code class="language-plaintext highlighter-rouge">session</code> and <code class="language-plaintext highlighter-rouge">value</code> key-value pair to our computer; <code class="language-plaintext highlighter-rouge">value</code> will be a long random string or number that identifies us to the server.</li>
+      <li>If we, as the user, set our browser to not save cookies, we’ll have to log in for every page we visit. But cookies might also identify us to advertisers, who can then track us across different sites we visit, if those sites include embedded images or scripts that are from the same third-party advertising service. So political entities like the EU have passed laws to help ensure companies behind websites are explicit to users about the purpose of cookies they want to store.</li>
+    </ul>
+  </li>
+  <li>When we visit Gmail again later, our browser will send the same value back as part of the <code class="language-plaintext highlighter-rouge">Cookie</code> header:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: gmail.com
+Cookie: session=value
+...
+</code></pre></div>    </div>
+    <ul>
+      <li>And cookies can be set to expire by the server, which is why after some number of days, we might be asked to log in again.</li>
+    </ul>
+  </li>
+  <li>In today’s source code directory in the CS50 IDE, we’ll first look at the example called <code class="language-plaintext highlighter-rouge">store</code>. We’ll <code class="language-plaintext highlighter-rouge">cd</code> into the <code class="language-plaintext highlighter-rouge">store</code> directory, and call <code class="language-plaintext highlighter-rouge">flask run</code> in our terminal to start our IDE’s web server. Then, we can visit the link to see a simple “store”:<br />
+<img src="/curriculum/8/notes/store.png" alt="webpage with input boxes of 0 for Foo, 0 for Bar, 0 for Baz, with button labeled Purchase and link to View your shopping cart" />
+    <ul>
+      <li>We can change the quantity of each item, and click “Purchase” to see them added to a virtual cart that tell us the count of each item we have.</li>
+      <li>We can keep shopping, but even if we close the window and reopen it, we see that our cart still saved the number of each item we added before.</li>
+    </ul>
+  </li>
+  <li>With cookies, we can implement <strong>sessions</strong> on our server. A session is an abstraction of saved state for each user’s visit to our website; our server might give me a cookie with <code class="language-plaintext highlighter-rouge">session=12345</code> and you a cookie with <code class="language-plaintext highlighter-rouge">session=78910</code>, and store some data for each user who visits, based on that session value.</li>
+  <li>With Flask, we only need a few lines of code to use this abstraction:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="kn">from</span> <span class="nn">flask_session</span> <span class="kn">import</span> <span class="n">Session</span>
+<span class="p">...</span>
+<span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">"SESSION_PERMANENT"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">"SESSION_TYPE"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"filesystem"</span>
+<span class="n">Session</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/update"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">update</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">:</span>
+        <span class="n">session</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">"/cart"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We set up our Flask app to use the Session library, and in each of our routes, we’ll have access to a <code class="language-plaintext highlighter-rouge">session</code> dictionary, which we can store data in our server’s memory or filesystem for each specific user.</li>
+      <li>We’ll introduce this library in a bit more detail in this week’s problem set.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="databases">Databases</h2>
+
+<ul>
+  <li>So far, we’ve seen how we can store data in CSV files. But finding data requires linear search, and we have to open, read, change, and save the entire file if we want to make a change.</li>
+  <li>Databases are a set of data, usually organized and managed by some software for us. Database management software such as MySQL and Postgres commonly allow for selecting, inserting, updating, and deleting data with a language called SQL, Structured Query Language.</li>
+  <li>A spreadsheet with rows and columns is like a simple database. Each column is a specific field of data, and each row contains values for one entry in the database.</li>
+  <li>For example, we might store information about students, with a column for an ID, a column for a name, and so on.</li>
+  <li>We might have different sheets, or tabs, within the same spreadsheet, and in databases these would be called tables.</li>
+  <li>With Google Sheets, we can create a spreadsheet called “university”, and create two sheets within that, one called “students” and one called “faculty”:<br />
+<img src="/curriculum/8/notes/faculty.png" alt="sheet labeled faculty with columns labeled id, name, department, email, phone" /></li>
+  <li>With a database, we can represent data in the same way, and SQL also requires us to specify the type of data we want to store in each field. By specifying the type, our database software can store and optimize our data more efficiently.</li>
+  <li>There are different variants, or dialects, of SQL, depending on what database program we’re using. In SQLite, a popular, lightweight software we’ll be using, data types include:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">BLOB</code></li>
+      <li><code class="language-plaintext highlighter-rouge">INTEGER</code></li>
+      <li><code class="language-plaintext highlighter-rouge">NUMERIC</code></li>
+      <li><code class="language-plaintext highlighter-rouge">REAL</code></li>
+      <li><code class="language-plaintext highlighter-rouge">TEXT</code></li>
+    </ul>
+  </li>
+  <li>And within the <code class="language-plaintext highlighter-rouge">INTEGER</code> type, we might specify the size as a <code class="language-plaintext highlighter-rouge">smallint</code>, <code class="language-plaintext highlighter-rouge">integer</code>, or <code class="language-plaintext highlighter-rouge">bigint</code>, each of which might be stored with a different number of bytes. We might be tempted to use a <code class="language-plaintext highlighter-rouge">bigint</code>, for example, but that might use unnecessary space and be more and more costly as we have more and more rows to store.</li>
+  <li><code class="language-plaintext highlighter-rouge">REAL</code> numbers can be a <code class="language-plaintext highlighter-rouge">real</code> type for a floating-point number, or <code class="language-plaintext highlighter-rouge">double precision</code>, with more bytes allocated.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">NUMERIC</code> type represents other types of numbers, such as a <code class="language-plaintext highlighter-rouge">boolean</code>. <code class="language-plaintext highlighter-rouge">date</code>, <code class="language-plaintext highlighter-rouge">datetime</code>, <code class="language-plaintext highlighter-rouge">numeric(scale, precision)</code> (for decimal numbers with a specific number of digits), <code class="language-plaintext highlighter-rouge">time</code>, and <code class="language-plaintext highlighter-rouge">timestamp</code>.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">TEXT</code> field can be a <code class="language-plaintext highlighter-rouge">char(n)</code> field, a fixed number of characters; a <code class="language-plaintext highlighter-rouge">varchar(n)</code>, a variable number of characters up to <em>n</em>, or a larger <code class="language-plaintext highlighter-rouge">text</code> field with no specified maximum. And we can infer, from our experience with arrays in C, that a fixed number of characters for each row would be faster to index into, since we can calculate exactly where each value will be. Our database software will provide this abstraction, and use the right data structures and algorithms for storing and accessing our data, faster than something we might be able to implement ourselves.</li>
+</ul>
+
+<h2 id="sqlite">SQLite</h2>
+
+<ul>
+  <li>We can open the CS50 IDE and use the terminal to explore SQLite, a popular database management software. SQLite is a technology for storing data on a server’s disk as a binary file, so it doesn’t have a server or other software to set up. (Other technologies, like Postgres and MySQL, use a running program that acts as a database server, which has better performance but requires some configuration and memory.) Instead, we’ll use the <code class="language-plaintext highlighter-rouge">sqlite3</code> program on our IDE as a human interface to a database file, and in our code, we’ll use abstractions that can open and work with an SQLite database file.</li>
+  <li>We’ll start by typing <code class="language-plaintext highlighter-rouge">sqlite3 froshims3.db</code>, and we’ll be able to create a table in that database with a command like <code class="language-plaintext highlighter-rouge">CREATE TABLE 'registrants' ('id' integer, 'name' varchar(255), 'dorm' varchar(255));</code>. We specify the name of our new table, and for each column or field, the type of data. And by convention, we use 255 for our <code class="language-plaintext highlighter-rouge">varchar</code> fields, since that used to be the maximum for many older databases, and are probably enough for all realistic possibilities, without being too excessive.</li>
+  <li>Nothing happens at our command line after, but we can type <code class="language-plaintext highlighter-rouge">.schema</code> and see the schema, or description, of our table:<br />
+<img src="/curriculum/8/notes/schema.png" alt=".schema command in sqlite in command line, showing our original CREATE TABLE command" /></li>
+  <li>We can add a row to our table with <code class="language-plaintext highlighter-rouge">INSERT INTO registrants (id, name, dorm) VALUES(1, 'Brian', 'Pennypacker');</code>, and conventionally the uppercased words are SQL keywords, while the rest are words specific to our data.</li>
+  <li>We can see our table with <code class="language-plaintext highlighter-rouge">SELECT * FROM registrants;</code>, and see our table printed out.</li>
+  <li>And we can easily filter our data with <code class="language-plaintext highlighter-rouge">SELECT * FROM registrants WHERE dorm = 'Matthews';</code>. We can specify just the fields we want to get back, too, with something like <code class="language-plaintext highlighter-rouge">SELECT name FROM registrants WHERE dorm = 'Matthews';</code></li>
+  <li>We can change rows with something like <code class="language-plaintext highlighter-rouge">UPDATE registrants SET dorm = 'Canaday' WHERE id = 1;</code>.</li>
+  <li>We can delete rows with something like <code class="language-plaintext highlighter-rouge">DELETE FROM registrants WHERE id = 1;</code>.</li>
+  <li>The CS50 IDE also has a graphical program, phpLiteAdmin, which can open SQLite files too. We can double-click <code class="language-plaintext highlighter-rouge">froshims3</code> in our files list on the IDE, and be able to browse rows. We can try to insert a row, too, by clicking on the name of the table and the Insert link, and see the SQL that phpLiteAdmin runs:<br />
+<img src="/curriculum/8/notes/phpliteadmin.png" alt="phpLiteAdmin showing INSERT command" /></li>
+  <li>We can start over by deleting the file <code class="language-plaintext highlighter-rouge">froshims3.db</code>, and creating a blank file with the same name. Now we can double-click it, and phpLiteAdmin will let us create a new table. We’ll create 7 fields this time, and we’ll have more options:<br />
+<img src="/curriculum/8/notes/phpliteadmin.png" alt="phpLiteAdmin showing Create new table with Field, Type, Primary Key, Autoincrement, Not NULL, and Default Value options for each field" />
+    <ul>
+      <li>For our first field, <code class="language-plaintext highlighter-rouge">id</code>, we’ll make that an <code class="language-plaintext highlighter-rouge">integer</code>, and we can use the Primary Key option to indicate to our database that this column will be the one used to uniquely identify each record. We’ll use autoincrement so our database will automatically provide the next value for <code class="language-plaintext highlighter-rouge">id</code> each time we add a record, and the Not Null option ensures that there is a value for that field for each record.</li>
+      <li>Then we’ll have a <code class="language-plaintext highlighter-rouge">name</code> field that is a <code class="language-plaintext highlighter-rouge">varchar</code> with a maximum length of 255, and make that Not NULL.</li>
+      <li>We’ll have a <code class="language-plaintext highlighter-rouge">dorm</code> field, <code class="language-plaintext highlighter-rouge">varchar</code> with a maximum length of 255, and a <code class="language-plaintext highlighter-rouge">phone</code> field that we’ll set to a fixed <code class="language-plaintext highlighter-rouge">char</code> of 10 characters. If we were to use a numeric field, phone numbers that start with 0 would lose those leading zeroes, and we might consider needing more characters if we wanted to support international phone numbers.</li>
+      <li>We’ll have an <code class="language-plaintext highlighter-rouge">email</code> field as a <code class="language-plaintext highlighter-rouge">varchar</code> with maximum length 255, and store a <code class="language-plaintext highlighter-rouge">birthdate</code> as a <code class="language-plaintext highlighter-rouge">date</code>. For <code class="language-plaintext highlighter-rouge">sports</code>, there might be more information we need someday, so we’ll have that as a <code class="language-plaintext highlighter-rouge">varchar</code> with a maximum length of 1024, an even power of 2.</li>
+    </ul>
+  </li>
+  <li>We can add fields to the table later, too.</li>
+  <li>We can click the SQL tab to insert rows manually, or use the Insert tab, but writing code to execute queries will be lead to the most organized data, since we’ll be able to set everything consistently.</li>
+</ul>
+
+<h2 id="sql">SQL</h2>
+
+<ul>
+  <li>We can import the CS50 SQL library to execute queries easily, with <code class="language-plaintext highlighter-rouge">lecture.py</code>:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">cs50</span> <span class="kn">import</span> <span class="n">SQL</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQL</span><span class="p">(</span><span class="s">"sqlite:///froshims.db"</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM registrants)
+
+for row in rows:
+    print(f"</span><span class="p">{</span><span class="n">row</span><span class="p">[</span><span class="s">'name'</span><span class="p">]}</span> <span class="n">registered</span><span class="s">")
+</span></code></pre></div>    </div>
+    <ul>
+      <li>Here, we’re opening a file called <code class="language-plaintext highlighter-rouge">froshims.db</code> in the same directory and calling it <code class="language-plaintext highlighter-rouge">db</code>, using <code class="language-plaintext highlighter-rouge">SQL</code> to open it. We call <code class="language-plaintext highlighter-rouge">db.execute</code> to run a query, and save the results into the <code class="language-plaintext highlighter-rouge">rows</code> list. Then, we can iterate over each row and print out any fields we’d like.</li>
+      <li>We can run <code class="language-plaintext highlighter-rouge">python lecture.py</code>, and the CS50 SQL library will also helpfully print a debug line showing what we sent to the database.</li>
+    </ul>
+  </li>
+  <li>Since we can query a database in Python, we can also integrate that into a Flask application. We can create a Flask <code class="language-plaintext highlighter-rouge">application.py</code> file:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="kn">from</span> <span class="nn">cs50</span> <span class="kn">import</span> <span class="n">SQL</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQL</span><span class="p">(</span><span class="s">"sqlite:///lecture.db"</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM registrants"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We select everything from the <code class="language-plaintext highlighter-rouge">registrants</code> table and store that in a variable called <code class="language-plaintext highlighter-rouge">rows</code>.</li>
+      <li>Then, we pass the results, <code class="language-plaintext highlighter-rouge">rows</code>, to the template.</li>
+    </ul>
+  </li>
+  <li>In our template, <code class="language-plaintext highlighter-rouge">templates/index.html</code>, we’ll iterate over a list of rows that are passed in, displaying each one’s <code class="language-plaintext highlighter-rouge">name</code> field:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends "layout.html" %}
+
+{% block body %}
+
+    <span class="nt">&lt;ul&gt;</span>
+        {% for row in rows %}
+
+            <span class="nt">&lt;li&gt;</span>{{ row["name"] }} registered<span class="nt">&lt;/li&gt;</span>
+
+        {% endfor %}
+    <span class="nt">&lt;/ul&gt;</span>
+
+{% endblock %}
+</code></pre></div>    </div>
+  </li>
+  <li>We can implement a search functionality too, by adding a <code class="language-plaintext highlighter-rouge">q</code> URL parameter:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"q"</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s">"SELECT * FROM registrants WHERE name = '</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s">'"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Now, only rows that have a matching name will be returned to our template to display.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="lecturedb">lecture.db</h2>
+
+<ul>
+  <li>A sample database of music metadata, <code class="language-plaintext highlighter-rouge">lecture.db</code>, is in this week’s source directory. Importantly, it demonstrates how we can relate data in different tables.</li>
+  <li>With our database of students, we might have noticed that the <code class="language-plaintext highlighter-rouge">dorm</code> field will have the same strings repeated over and over again. Instead of storing the same data, we can store a reference to some other table of dorms, using fewer bytes to represent the same data.</li>
+  <li>In the sample database, we have a table for Albums, Artists, and Tracks. In the Album table, each row has an AlbumId, Title, and ArtistId. The Artist table has an ArtistId and Name for each row, so by joining the two tables together, we can figure out the artist’s name. And since each artist has multiple albums, we’re saving space. If a row in the Artist table has more data, we can update it just once, rather than in every row of the Album table, if that data was repeated there.</li>
+  <li>We can use phpLiteAdmin in the CS50 IDE, as before, to look at the tables and rows in <code class="language-plaintext highlighter-rouge">lecture.db</code>, and run a query like <code class="language-plaintext highlighter-rouge">SELECT * FROM Album WHERE ArtistId = 1;</code> to see all the albums by the artist with ID 1. We can use SQL to join tables, getting the artist’s name too, with <code class="language-plaintext highlighter-rouge">SELECT * FROM Album, Artist WHERE Album.ArtistId = Artist.ArtistId;</code>. The <code class="language-plaintext highlighter-rouge">name</code> from the Artist table will also be selected (since we said <code class="language-plaintext highlighter-rouge">SELECT *</code>), and matched to each row in Album where the <code class="language-plaintext highlighter-rouge">ArtistId</code> field is the same. Another way to express the same idea would be <code class="language-plaintext highlighter-rouge">SELECT * FROM Artist JOIN Album ON Artist.ArtistId = Album.ArtistId;</code>.</li>
+  <li>Normalizing our database is this method of storing redundant data once, and using a reference to another table as needed to save space, with a slight cost to performance and simplicity.</li>
+  <li>In SQL, we can add a <code class="language-plaintext highlighter-rouge">UNIQUE</code> constraint to a field, without using it as a primary key. We can also indicate that a field should be an <code class="language-plaintext highlighter-rouge">INDEX</code>, where the database should build an index (with a tree, hash table, or some other data structure) for looking up fields more quickly. Finally a <code class="language-plaintext highlighter-rouge">FOREIGN KEY</code> is what we would call a field that refers to a row in some other table; for example, the <code class="language-plaintext highlighter-rouge">ArtistId</code> field in the <code class="language-plaintext highlighter-rouge">Album</code> table is a foreign key to the <code class="language-plaintext highlighter-rouge">Artist</code> table.</li>
+  <li>SQL also has functions for numeric operations like <code class="language-plaintext highlighter-rouge">AVG</code>, <code class="language-plaintext highlighter-rouge">COUNT</code>, <code class="language-plaintext highlighter-rouge">MAX</code>, <code class="language-plaintext highlighter-rouge">MIN</code>, and <code class="language-plaintext highlighter-rouge">SUM</code>.</li>
+</ul>
+
+<h2 id="problems">Problems</h2>
+
+<ul>
+  <li>One problem with databases is <strong>race conditions</strong>, where the timing of two actions or events cause unexpected behavior.</li>
+  <li>For example, when we sign up for a new account on a website, it might ask us for a username we’d like. If the username is taken already, we’ll see a message that tells us so, and if not, we’re able to start creating an account with that username. And if we take our time with putting in the rest of our information, that username might be taken by someone else by the time we actually submit the form. But if the web server didn’t check again, there would be a problem where the same username is now reassigned to us!</li>
+  <li>If two people, or web server threads, are checking the state of a variable at the exact same time, and then make a change based on that, after some amount of time, then there is a race condition in that window of time.</li>
+  <li>Another example is two people, withdrawing money from two different ATMs at the exact same time, with the same account information. If the account has $100, but both people try to withdraw $100 at the same time, each ATM might check the account balance, see there is a balance of $100, and saves $0 back into the account. But each ATM did this, so a total of $200 would have been withdrawn!</li>
+  <li>Another example involves two roommates and a fridge. The first roommate comes home, and sees that there is no milk in the fridge. So the first roommate leaves to the store to buy milk, and while they are at the store, the second roommate comes home, sees that there is no milk, and leaves for another store to get milk. Later, there will be two jugs of milk in the fridge. By leaving a note, we can solve this problem. We can even lock the fridge so that our roommate can’t check whether there is milk, until we’ve gotten back.</li>
+  <li>In the database world, we can also lock rows and tables. We can use <strong>transactions</strong>, where a set of actions is guaranteed to happen together. That property is called <strong>atomicity</strong>, where, for example, we can check the value of a row and change it, without anything else being able to read or change that value.</li>
+  <li>We might have also seen some websites, like for airline tickets or hotel rooms, provide a window of time after we add something to our cart, that reserves it for us, letting us fill out our information without someone else purchasing it in the meantime.</li>
+  <li>Another problem in SQL is called a <strong>SQL injection attack</strong>, where an adversary can execute their own commands on our database. Earlier, we passed in the <code class="language-plaintext highlighter-rouge">q</code> URL parameter to filter registrants based on their name, with <code class="language-plaintext highlighter-rouge">rows = db.execute(f"SELECT * FROM registrants WHERE name = '{q}'")</code>. But if <code class="language-plaintext highlighter-rouge">q</code> had the value of <code class="language-plaintext highlighter-rouge">Brian'; DELETE FROM registrants WHERE name = 'Brian</code>, it would end our previous statement and run another statement.</li>
+  <li>To guard against this, we can sanitize user data, or escape characters like semicolons and single quotes, such that they are interpreted as part of the string, rather than special characters that end strings or commands.</li>
+  <li>The CS50 SQL Library allows us to escape user input with the <code class="language-plaintext highlighter-rouge">execute</code> function, and we can write <code class="language-plaintext highlighter-rouge">rows = db.execute("SELECT * FROM registrants WHERE name = :name", name=q)</code> where we use a special placeholder, <code class="language-plaintext highlighter-rouge">:name</code>, that will be escaped before it is substituted into the string.</li>
+  <li>Another example would be typing in <code class="language-plaintext highlighter-rouge">' OR '1' = '1</code> in a password field; if the query is <code class="language-plaintext highlighter-rouge">db.execute(f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'")</code>, then substituting that password would get us <code class="language-plaintext highlighter-rouge">db.execute("SELECT * FROM users  WHERE username = 'me@examplemailprovider.com' AND password = '' OR '1' = '1'")</code>, and that would select that user since <code class="language-plaintext highlighter-rouge">1 = 1</code>.
+    <ul>
+      <li>On the other hand, the escaped input would be substituted as <code class="language-plaintext highlighter-rouge">db.execute("SELECT * FROM users  WHERE username = 'me@examplemailprovider.com' AND password = '\' OR \'1\' = \'1'")</code>, preventing the intention of our command from being changed since the single quotes are escaped.</li>
+    </ul>
+  </li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

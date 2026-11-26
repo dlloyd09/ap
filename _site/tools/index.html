@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="CS50 Tools">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>CS50 Tools</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 id="cs50-tools">CS50 Tools</h1>
+
+<iframe title="Tools" src="/assets/pdfs/tools.pdf" width="838" height="1130" marginwidth="0" marginheight="0" frameborder="0" scrolling="no"></iframe>
+
+<hr />
+
+<h2 id="cs50-sandbox">CS50 Sandbox</h2>
+
+<p>Temporary programming environments for students and teachers
+<a href="https://sandbox.cs50.io/">https://sandbox.cs50.io/</a></p>
+
+<h2 id="cs50-ide">CS50 IDE</h2>
+
+<p>CS50 IDE is a cloud-based Integrated Development Environment powered by AWS Cloud9 that features a cloud-based Ubuntu environment. Since it’s cloud-based, you can continue working on your problem sets even if you use a different computer!</p>
+
+<p>You can also share your workspace with others. Visit <a href="https://cs50.readthedocs.io/ide/online/#sharing-your-workspace">https://cs50.readthedocs.io/ide/online/#sharing-your-workspace</a> for more information.</p>
+
+<h2 id="command-line-tools">Command-Line Tools</h2>
+
+<h4 id="help50"><code class="language-plaintext highlighter-rouge">help50</code></h4>
+
+<p>Prints less arcane compiler and Valgrind messages<br />
+Usage: <code class="language-plaintext highlighter-rouge">help50 ./program command line args</code> or<br />
+<code class="language-plaintext highlighter-rouge">help50 valgrind ./program command line args</code></p>
+
+<h4 id="debug50"><code class="language-plaintext highlighter-rouge">debug50</code></h4>
+
+<p>Runs a program step by step, line by line, to see what is happening<br />
+Usage: <code class="language-plaintext highlighter-rouge">debug50 ./program command line args</code></p>
+
+<h4 id="style50"><code class="language-plaintext highlighter-rouge">style50</code></h4>
+
+<p>Checks for alignment to the <a href="https://cs50.readthedocs.io/style/c/">CS50 style guide</a><br />
+Usage: <code class="language-plaintext highlighter-rouge">style50 program.c</code></p>
+
+<h4 id="check50"><code class="language-plaintext highlighter-rouge">check50</code></h4>
+
+<p>Checks for correctness using test cases<br />
+Usage: <code class="language-plaintext highlighter-rouge">check50 cs50/problems/2018/ap/problem_name</code></p>
+
+<h2 id="documentation">Documentation</h2>
+
+<p><a href="https://cs50.readthedocs.io/">https://cs50.readthedocs.io/</a></p>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>
