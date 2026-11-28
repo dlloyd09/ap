@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Security">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Security</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="security">Security</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#privacy" id="markdown-toc-privacy">Privacy</a></li>
+  <li><a href="#deleting-files" id="markdown-toc-deleting-files">Deleting Files</a></li>
+  <li><a href="#cookies" id="markdown-toc-cookies">Cookies</a></li>
+  <li><a href="#incognito-mode" id="markdown-toc-incognito-mode">Incognito Mode</a></li>
+  <li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
+  <li><a href="#passwords" id="markdown-toc-passwords">Passwords</a></li>
+  <li><a href="#password-resetting" id="markdown-toc-password-resetting">Password Resetting</a></li>
+  <li><a href="#using-the-same-password" id="markdown-toc-using-the-same-password">Using The Same Password</a></li>
+  <li><a href="#password-managers" id="markdown-toc-password-managers">Password Managers</a></li>
+  <li><a href="#two-factor-authentication" id="markdown-toc-two-factor-authentication">Two Factor Authentication</a></li>
+  <li><a href="#network-security" id="markdown-toc-network-security">Network security</a></li>
+  <li><a href="#vpn" id="markdown-toc-vpn">VPN</a></li>
+  <li><a href="#firewall" id="markdown-toc-firewall">Firewall</a></li>
+  <li><a href="#encryption" id="markdown-toc-encryption">Encryption</a></li>
+  <li><a href="#public-key-cryptography" id="markdown-toc-public-key-cryptography">Public Key Cryptography</a></li>
+  <li><a href="#phishing" id="markdown-toc-phishing">Phishing</a></li>
+  <li><a href="#malware" id="markdown-toc-malware">Malware</a></li>
+  <li><a href="#trust" id="markdown-toc-trust">Trust</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+  <li>Our data is under constant threat, but how can we defend ourselves?</li>
+</ul>
+
+<h2 id="privacy">Privacy</h2>
+
+<ul>
+  <li>Keeping people away from things you don’t want them to see</li>
+  <li>Computers are among the least secure devices you own
+    <ul>
+      <li>Data or files are stored on them as 0s and 1s
+        <ul>
+          <li>Can be financial info, photos, or other personally identifiable information (PII), such as:
+            <ul>
+              <li>Social Security number</li>
+              <li>age</li>
+              <li>race</li>
+              <li>phone number</li>
+              <li>medical information</li>
+              <li>biometric information</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>PII and other information placed online can be used to enhance a user’s online experiences.</li>
+</ul>
+
+<h2 id="deleting-files">Deleting Files</h2>
+
+<ul>
+  <li>What does it mean to delete a file off of a hard drive?
+    <ul>
+      <li>Visually, it disappears from a desktop or folder</li>
+    </ul>
+  </li>
+  <li>Files are stored on a computer as 0s and 1s</li>
+  <li>Some space needs to be allocated for the file</li>
+  <li>The operating system has a file that keeps track of files an their location on disk</li>
+  <li>Graphically, when a file is deleted, it moves to the trash (or recycle bin)
+    <ul>
+      <li>It can still be easily revived from here, until you empty the trash</li>
+    </ul>
+  </li>
+  <li>However, an operating system doesn’t actually delete it from the hard drive
+    <ul>
+      <li>It simply forgets the location and existence of the file!</li>
+      <li>One can theoretically recover data by looking for familiar patterns of bits</li>
+    </ul>
+  </li>
+  <li>So how do we delete more securely?
+    <ul>
+      <li>Re-saving a file with overridden information actually could not override the old bits but rather create more 0s and 1s stored on a hard drive!</li>
+      <li>Special software can wipe data off of a hard drive</li>
+    </ul>
+  </li>
+  <li>Who do computers have this obvious flaw with deleting?
+    <ul>
+      <li>What if we accidentally delete a file?
+        <ul>
+          <li>This structure allows for recovery</li>
+        </ul>
+      </li>
+      <li>Wiping data also takes a lot of time, so it’s much faster to just forget locations of data</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="cookies">Cookies</h2>
+
+<ul>
+  <li>A feature supported by HTTP</li>
+  <li>Little values a web server puts on a user’s browser</li>
+  <li>Used to remember if a user has visited a website before
+    <ul>
+      <li>Allows you to not have to log in every time you visit or refresh a page
+        <ul>
+          <li>When you log into a web server, a cookie is planted on your browser</li>
+        </ul>
+      </li>
+      <li>Stored in a database</li>
+      <li>Browser will send value to web server to remind of previous login</li>
+    </ul>
+  </li>
+  <li>When we make a request we send:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: example.com
+</code></pre></div>    </div>
+  </li>
+  <li>We receive:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Set-Cookie: session=29823bf3-075a-433a-8754-707d05c418ab
+</code></pre></div>    </div>
+    <ul>
+      <li>The server gives us a cookie.</li>
+    </ul>
+  </li>
+  <li>A cookie is like an ink-based hand stamp for an amusement park or club</li>
+  <li>Wireless information can be intercepted
+    <ul>
+      <li>What if a hacker could obtain the cookie
+        <ul>
+          <li>Session hijacking attack</li>
+          <li>If you have already logged in, hacker can pretend to be you</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Encryption scrambles this value so hackers cannot easily use it</li>
+  <li>Browser history remembers everywhere you’ve been and everything you’ve done there
+    <ul>
+      <li>Convenient if you want to recall a website you’ve visited
+        <ul>
+          <li>But, so can anyone else with access to your browser</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Can clear browser history and cookies
+    <ul>
+      <li>History likely not securely scrubbed</li>
+      <li>Will protect you from nosey friends</li>
+      <li>Websites will forget you visited as the cookies will be deleted as well!</li>
+    </ul>
+  </li>
+  <li>Search engines can use your history and  cookies to suggest targeted websites or products based on websites you’ve visited. Targeted advertising is used to help businesses, but it can be misused at both individual and aggregate levels.</li>
+  <li>Every convenience that these technologies offer us comes with a cost. We can have our browser store things like our shipping information or credit card number to make it that much easier to purchase things online, but if someone were to gain access to our machine, they too would acquire this information. This too, brings up ethical concerns. How accountable are companies for our data? What are their obligations to their users in regards to how their data is used and stored? Are these businesses intentionally trying to harm us by selling or distributing our data?</li>
+  <li>Computing can even play a part in social and  political issues, like in 2018, when <a href="https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal">Cambridge Analytica</a> harvested user Facebook data fro political advertising.</li>
+</ul>
+
+<h2 id="incognito-mode">Incognito Mode</h2>
+
+<ul>
+  <li>Can open up a typically different colored browser window</li>
+  <li>Use if you want history automatically removed</li>
+  <li>Useful when building a website as sometimes you want a browser to forget old iterations of your website build</li>
+</ul>
+
+<h2 id="authentication">Authentication</h2>
+
+<ul>
+  <li>All of this assumes you log in</li>
+  <li>If you don’t use a passcode to protect your device, anyone can pretend to be you
+    <ul>
+      <li>What if you lose your phone or device?</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="passwords">Passwords</h2>
+
+<ul>
+  <li>On a phone could only be a few digits
+    <ul>
+      <li>Not super secure</li>
+      <li>__ __ __ __
+        <ul>
+          <li>With numbers, each space has 10 options</li>
+          <li>10 x 10 x 10 x 10 = 10,000 possibilities</li>
+          <li>0000-9999</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>On many smartphones, you will have to wait for an amount of time if you have entered a bad passcode
+    <ul>
+      <li>Slows down the process of someone guessing</li>
+    </ul>
+  </li>
+  <li>Add more digits or letters of the alphabet</li>
+  <li>Using a-z, A-Z, 0-9</li>
+  <li>__ __ __ __</li>
+  <li>Each space now has 62 options (26 + 26 + 10)</li>
+  <li>62 x 62 x 62 x 62 = 14,776,336 possibilities</li>
+  <li>Maybe you’re super secure and you have a 20-char password
+    <ul>
+      <li>You could forget it</li>
+      <li>Annoying to type in repetitively</li>
+    </ul>
+  </li>
+  <li>No one fits all
+    <ul>
+      <li>Short = bad, longer = good</li>
+      <li>Don’t use popular words and phrases
+        <ul>
+          <li>Hackers will look for words or common phrases</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Most common Passwords
+    <ol>
+      <li>123456</li>
+      <li>123456789</li>
+      <li>qwerty</li>
+      <li>12345678</li>
+      <li>111111</li>
+      <li>1234567890</li>
+      <li>1234567</li>
+      <li>password</li>
+      <li>123123</li>
+      <li>987654321</li>
+    </ol>
+  </li>
+  <li>Hackers have dictionaries of bad passwords that they can search through and try</li>
+  <li>Random passwords
+    <ul>
+      <li>Usually have to confirm so it can be hard to replicate</li>
+    </ul>
+  </li>
+  <li>Using numbers to represent letter is common
+    <ul>
+      <li>1 for l</li>
+      <li>4 for A</li>
+    </ul>
+  </li>
+  <li>It’s suggested you mix uppercase, lowercase, and and throw in numbers
+    <ul>
+      <li>Good to use misspellengs</li>
+    </ul>
+  </li>
+  <li>Don’t put your post-it with your password on your monitor!</li>
+  <li>Constant password changes can be a net negative
+    <ul>
+      <li>Can encourage easier passwords to help with memorization</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="password-resetting">Password Resetting</h2>
+
+<ul>
+  <li>What if you forget your password?
+    <ul>
+      <li>Often can click on a link to reset your password
+        <ul>
+          <li>Asks you to type email address or username</li>
+        </ul>
+      </li>
+      <li>Typically, you get an email with a link
+        <ul>
+          <li>Hopefully this goes back to the same website!</li>
+          <li>It likely has a random value in the URL</li>
+        </ul>
+      </li>
+      <li>Once back at the website, you update your password</li>
+    </ul>
+  </li>
+  <li>The website has a database
+    <ul>
+      <li>It generated a random number and stored it with a note indicating password recovery</li>
+      <li>The website assumes that anyone who has access to this value and to the user’s email is you</li>
+    </ul>
+  </li>
+  <li>Typically, tech staff can’t tell you what your password is
+    <ul>
+      <li>Odds are your password is encrypted (scrambled) or, more technically, hashed in their database</li>
+    </ul>
+  </li>
+  <li>Getting a password in email means that the password are not hashed or encrypted!
+    <ul>
+      <li>Also, sending a password over email opens that email to interception</li>
+      <li>This is a red flag if a website does this</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="using-the-same-password">Using The Same Password</h2>
+
+<ul>
+  <li>You may have a favorite password that you reuse
+    <ul>
+      <li>Upside is that it’s convenient</li>
+    </ul>
+  </li>
+  <li>However, what if one of the websites are hacked?
+    <ul>
+      <li>A hacker may try to use the password on other websites to see what she or he can get into!</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="password-managers">Password Managers</h2>
+
+<ul>
+  <li>Difficult to remember all these passwords</li>
+  <li>Software called password managers exist that store on your phone or hard drive all usernames and passwords in an encrypted way
+    <ul>
+      <li>You have a master password that logs you into everywhere!
+        <ul>
+          <li>Store it physically in somewhere like a safety deposit box</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Password managers create long random passwords and will log in for you
+    <ul>
+      <li>All websites have different passwords!</li>
+    </ul>
+  </li>
+  <li>However, if you lose the master password, you cannot get the accounts back!</li>
+</ul>
+
+<h2 id="two-factor-authentication">Two Factor Authentication</h2>
+
+<ul>
+  <li>First factor is a password
+    <ul>
+      <li>Historically, something “only” the user knows</li>
+      <li>Can be guessed</li>
+    </ul>
+  </li>
+  <li>Second factor should be fundamentally different
+    <ul>
+      <li>Should be something you have
+        <ul>
+          <li>
+            <p>An RSA device displays a unique value that is synced with a server</p>
+
+            <p><img src="/curriculum/understanding_technology/security/notes/rsa.png" alt="RSA" /></p>
+            <ul>
+              <li>This number needs to be typed in too!</li>
+              <li>As long as this device isn’t stolen by someone with your password, they can’t get in as easily</li>
+            </ul>
+          </li>
+          <li>
+            <p>Phones now run software that allows you to get a code and type them in</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Should think about what websites you care about the most and enable two factor authentication
+    <ul>
+      <li>Some companies can use sms (text messages)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="network-security">Network security</h2>
+
+<ul>
+  <li>So many of our current networks are wireless
+    <ul>
+      <li>You probably been conditioned to look for free wifi
+        <ul>
+          <li>Sometimes still might not connect for various reasons</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>If the wireless connection has not padlock (no password to log in) the connection is not secure
+    <ul>
+      <li>You may still visit https or secure websites</li>
+      <li>However, everything you do on http sites can be seen</li>
+    </ul>
+  </li>
+  <li>What to do?
+    <ul>
+      <li>Don’t use that network</li>
+      <li>Use a VPN (Virtual Private Network)
+        <ul>
+          <li>Connection to internet is encrypted</li>
+        </ul>
+
+        <p><img src="/curriculum/understanding_technology/security/notes/vpn.png" alt="VPN" /></p>
+        <ul>
+          <li>With an unsecured connection, anyone can access your data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="vpn">VPN</h2>
+
+<ul>
+  <li>First establish encrypted connection to a server and let this server communicate for you
+    <ul>
+      <li>The connection between the VPN server and website can still be insecure!</li>
+    </ul>
+  </li>
+  <li>Because we are encrypting data through an algorithm, using a VPN can slow down speed</li>
+</ul>
+
+<h2 id="firewall">Firewall</h2>
+
+<ul>
+  <li>A physical firewall is a wall between connected buildings that prevents the spread of fire</li>
+  <li>In the world of computer science, a firewall is software that looks at IP addresses and helps keep bad guys out and user data inside</li>
+  <li>Helps prevent people from accessing your computer</li>
+</ul>
+
+<h2 id="encryption">Encryption</h2>
+
+<ul>
+  <li>Data sent via public networks can be “sniffed” by adversaries. One way this can happen is through a rogue access point, a wireless access point not authorized by the network administrator, that gives unauthorized access to secure networks.</li>
+  <li>Suppose I want to send a secret message for “HI”
+    <ul>
+      <li>HI ➟ IJ</li>
+      <li>Change each letter by 1</li>
+      <li>The recipient needs to know how it changed to revert</li>
+    </ul>
+  </li>
+  <li>Plaintext ➟ Cyphertext ➟ Plaintext
+    <ul>
+      <li>HI ➟ IJ ➟ HI</li>
+    </ul>
+  </li>
+  <li>This is called a caesar cypher
+    <ul>
+      <li>Rotational cyphers are not that secure
+        <ul>
+          <li>Can be guessed easily</li>
+          <li>Not used for internet encryption</li>
+        </ul>
+      </li>
+      <li>For this to work, recipient needs the key
+        <ul>
+          <li>To know the key, we need to agree in advance
+            <ul>
+              <li>Can’t send it encrypted as well as they need the key!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="public-key-cryptography">Public Key Cryptography</h2>
+
+<ul>
+  <li>The last example with a caesar cypher is secret-key cryptography
+    <ul>
+      <li>Only one key</li>
+    </ul>
+  </li>
+  <li>In public key cryptography there are two keys, one public and one private
+    <ul>
+      <li>Mathematical relationship between them</li>
+      <li>Use public key to encrypt, private key to decrypt</li>
+    </ul>
+
+    <p><img src="/curriculum/understanding_technology/security/notes/alicebob.png" alt="Alice and Bob" /></p>
+    <ul>
+      <li>Bob’s private key can undo the effects of his public key</li>
+      <li>When Bob responds…</li>
+    </ul>
+
+    <p><img src="/curriculum/understanding_technology/security/notes/bob.png" alt="Bob Response" /></p>
+    <ul>
+      <li>Bob sends a message using Alice’s public key</li>
+    </ul>
+  </li>
+  <li>Your browser has its own public and private keys
+    <ul>
+      <li>So does websites like Google and Amazon
+        <ul>
+          <li>This allows them to communicate securely with you</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Often this processes is used to exchange a secret key</li>
+</ul>
+
+<h2 id="phishing">Phishing</h2>
+
+<ul>
+  <li>These kind of attacks have become so prevent that the following has been posted around Harvard’s campus</li>
+</ul>
+
+<p><img src="/curriculum/understanding_technology/security/notes/phishing.png" alt="phishing" /></p>
+<ul>
+  <li>Phishing attacks are when an adversary sends a somewhat official-looking email
+    <ul>
+      <li>May contain a link asking for a password or account info</li>
+      <li>The email may contain an elaborate backstory “justifying” the request</li>
+      <li>The malicious email is trying to obtain information from you</li>
+    </ul>
+  </li>
+  <li>Odds are that the link provided doesn’t go to the website being claimed
+    <ul>
+      <li>Can go to a website that looks legit
+        <ul>
+          <li>People can just copy HTML</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Results in giving up private information</li>
+  <li>It’s healthy to distrust most email you get
+    <ul>
+      <li>Don’t follow links, type in the address for the company yourself</li>
+      <li>Sketchy emails may have typographical errors</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="malware">Malware</h2>
+
+<ul>
+  <li>Malicious software can also be sent via email</li>
+  <li>Windows is particularly vulnerable</li>
+  <li>Software can be injected into your browser and your computer to erase your hard drive, make your computer send spam, or hold your data hostage</li>
+  <li>Some malware encrypts your data and asks for large sums of money to get the key to decrypt it
+    <ul>
+      <li>Key could not even work!</li>
+      <li>This is called ransomware</li>
+    </ul>
+  </li>
+  <li>Malware can ultimately do anything on your computer</li>
+  <li>Viruses are a type of malware that self replicates and inserts code into existing programs</li>
+  <li>Computer virus and malware scanning software can help protect a computer from malicious software</li>
+  <li>All real-world systems have the potential to be exploited. An adversary only needs one point of weakness and the developer needs to make sure the <em>entire</em> system is secure.</li>
+  <li>As users of technology, we can do our part to combat against adversaries by updating our software regularly and reviewing and modifying the permissions we give to the software that we install.</li>
+</ul>
+
+<h2 id="trust">Trust</h2>
+
+<ul>
+  <li>At the end of the day, all of security and privacy boils down to trust
+    <ul>
+      <li>People around you</li>
+      <li>Algorithms/software</li>
+      <li>Manufacturers</li>
+      <li>Websites</li>
+    </ul>
+  </li>
+  <li>Everything we post online can be used in a way that is unintended. Anyone who can view the things we post can repost it, screenshot it, forward it to others, etc. Information placed online can be used in ways that were not intended and that may have a harmful effect.</li>
+  <li>Using multiple usernames and pseudonyms can help obscure your identity online, but combining various types of information available online can help others deduce private information about you</li>
+  <li>We’ve downloaded software with trust that it will only do what it claims
+    <ul>
+      <li>Word could log your key strokes, also called keylogging. This is the use of a program to record every keystroke made by a computer user in order to gain fraudulent access to passwords and other confidential information.</li>
+      <li>Chrome could monitor you even when not on Google’s website</li>
+      <li>Snapchat could not delete posts after being seen</li>
+    </ul>
+  </li>
+  <li>There have been cases where software was written to cover tracks of being monitored!</li>
+  <li>Who’s to say the software we’re using is actually doing what we say?</li>
+  <li>It’s east to curl up into a ball and worry, but we need to decide who to trust</li>
+  <li>Security measures make it more difficult for someone to be malicious, but ultimately they can’t guarantee privacy</li>
+  <li>You have to decide what data you’re comfortable with storing, what you view on the internet, who to trust, and how much to trust them</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

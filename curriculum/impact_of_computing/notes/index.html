@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Impact of Computing">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Impact of Computing</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="impact-of-computing">Impact of Computing</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#developing-computational-artifacts" id="markdown-toc-developing-computational-artifacts">Developing Computational Artifacts</a></li>
+  <li><a href="#scaling" id="markdown-toc-scaling">Scaling</a></li>
+  <li><a href="#people-and-computers" id="markdown-toc-people-and-computers">People and Computers</a></li>
+  <li><a href="#solving-other-problems-at-scale" id="markdown-toc-solving-other-problems-at-scale">Solving Other Problems at Scale</a></li>
+  <li><a href="#models-and-simulations" id="markdown-toc-models-and-simulations">Models and Simulations</a>    <ul>
+      <li><a href="#monte-carlo-simulation" id="markdown-toc-monte-carlo-simulation">Monte Carlo Simulation</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-digital-divide" id="markdown-toc-the-digital-divide">The Digital Divide</a></li>
+  <li><a href="#ethics-and-legalities-of-computing" id="markdown-toc-ethics-and-legalities-of-computing">Ethics and Legalities of Computing</a></li>
+  <li><a href="#legal-use" id="markdown-toc-legal-use">Legal Use</a></li>
+</ul>
+
+<h2 id="developing-computational-artifacts">Developing Computational Artifacts</h2>
+
+<p>More often than not, developers work in teams to accomplish a shared goal. There are various models for collaboration such as pair programming, consultation for debugging, and splitting front end and back development. This idea of compartmentalizing code into various independent parts is called modularity. This allows us to easily add or modify existing projects without having to rewrite the entire thing from scratch. Imagine if every time our computers broke we had to buy an entirely new one. This may be the case, but if we can identify which part is broken or faulty we can replace just the broken component, saving us money and time.</p>
+
+<p>Collaborating with others is about more than just programming. You have to communicate with one another about the design of the program. You’ll also have to consider the inputs and outputs each of you expect for your portion. You may not always agree so conflict resolution will be key to navigating the project. You’ll need to negotiate and ultimately come to some consensus with your team.</p>
+
+<p>Although computing innovations can be used in ways that their creators had not originally intended, it is important as a creator to consider the various ways it can be used both intentionally and unintentionally. These users could potentially have positive or negative effects on your project as a whole. Even a single effect can be viewed as both beneficial and harmful by different people, or even by the same person. For example, the world wide web was originally designed to provide a quick way to share information to the scientific community. Had users only used this technology for that purpose, we would not have the extensive access to resources that we do today, furthermore other fields would have missed out on this technology since they were not the intended audience. Advances in computing have generated and increased creativity in other fields, such as medicine, engineering, communications, and the arts</p>
+
+<h2 id="scaling">Scaling</h2>
+
+<p>Scalability is a program’s ability to scale to accommodate larger data sets, or more generally, an increased work load. Scalability itself is not a discrete feature in a program but is a part of the design process, and is often a cooperation of software and hardware. As data sets grow, and thus increase the work load of a program, it becomes increasingly more important to consider program or database’s ability to accommodate any increase in data. Program documentation is another way to address scalability. It helps developers maintaining correct programs when working individually or in collaborative programming environments.</p>
+
+<p>Large increases in users and data usually prompt businesses and developers to consider more scalable options. Rapid sharing of a program or running a program with a large number of users can result in significant impacts beyond the intended purpose or control of the programmer. Consider if Facebook only used a database that could only store 10,000 rows of user information. That may have seemed like a lot when they started implementing their platform but over time usage grows and the need for more space becomes a necessity. One way that companies have handled their large user databases is with a concept known as sharding. This allows us to store a database in multiple databases using a shared key.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/shard.png" alt="sharded database" /></p>
+
+<h2 id="people-and-computers">People and Computers</h2>
+
+<p>Behind all the technology we use and interact is a person or, more likely, a team of people. The development of these new technologies have changed our lives drastically. Understanding the purpose of a computing innovation provides developers better sense of how to develop that computing innovation. Perhaps you remember rotary phones or landlines more generally.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/landline.jpg" alt="landline" /></p>
+
+<p>Landlines were physically connected to a telephone line. In the 1940s, companies like AT&amp;T and Motorola developed mobile phones that were essentially just two-way radio signals.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/mobile_phone.jpg" alt="mobile phone" /></p>
+
+<p>It wasn’t until the early 90s that companies started integrating other features that we now consider trivial, like calculators and text messaging.</p>
+
+<p>In this day and age, most everyone has a cell phone. Just like any other computing innovation, they can be both beneficial and harmful. The average American spends about four hours on their phone in a day! While the original developers likely anticipated certain outcomes like more frequent communication with others, it seems unlikely that they anticipated the rate at which we would use them for things other than calling and texting, since not every effect of a computing innovation is anticipated in advance. This just goes to show that the way people complete tasks often changes to incorporate new computing innovations.</p>
+
+<h2 id="solving-other-problems-at-scale">Solving Other Problems at Scale</h2>
+
+<p>Just as we have distributed computing solutions, whereby we can solve problems more efficiently by allowing multiple machines to run different tasks, we can have distributed science. Using technology, research can be carried out by people all over the world, who may or may not be scientists, who can contribute data via their own computing devices. This is called citizen science.</p>
+
+<p>In this way, other fields outside of computer science have developed more efficient and accurate systems to identify problems or concerns and develop and test solutions. Moreover, we can share these results with more people than we otherwise could have.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/kickstarter.png" alt="kickstarter" /></p>
+
+<p>Platforms like Kickstarter and GoFundMe have adopted to similar models to fund all sorts of projects via their website. They use what’s referred to as crowdsourcing to connect start ups, social causes, and other organizations with funding. Crowdsourcing is the practice of obtaining input or information from a large number of people via the Internet. Each platform has a slightly different model but generally people see a product or cause they want to fund and contribute some amount of money (predetermined or otherwise). Over time more people contribute and eventually the group might reach their goal that they may have otherwise been able to do with a single funder.</p>
+
+<h2 id="models-and-simulations">Models and Simulations</h2>
+
+<p>Computer programs can be used to create models and simulations, to test hypotheses and generate new understanding and knowledge.  A simulation is a representation that uses varying sets of values to reflect the changing state of a phenomenon.  Simulations can model existing knowledge (like finding the area of a circle) or help us explore phenomenon that could happen in the future (like predicting the damage caused by a natural disaster). Simulations are applicable in everyday life, from testing new car designs to modeling possible furniture arrangements. Taking advantage of simulations as a tool can help people and companies save time, money, and effort by modeling new ideas before putting them into production. We can often use simulations to model phenomenon that would be difficult given the constraints of the real world. If we wanted to simulate the trajectory of a rocket through space, that would be impossible because of the Earth’s gravitational pull.</p>
+
+<h3 id="monte-carlo-simulation">Monte Carlo Simulation</h3>
+<iframe class="scratchpad" frameborder="0" height="420" scrolling="no" src="https://www.khanacademy.org/computer-programming/monte-carlo-finding-the-value-of-pi/6530004791197696/embedded?embed=yes&amp;article=yes&amp;editor=no&amp;buttons=no&amp;author=no&amp;autoStart=yes&amp;width=610&amp;height=420" width="610"></iframe>
+
+<p>Developing simulations take on a similar life as developing programs. It is unlikely that one could build a simulation to model a complex system all at once, top to bottom. We might try to modularize the system and design one part of it first. We could also simplify some of the underlying functionality of our simulation and get that part to work before building on top of that. Remember that just like our programs, bias can be embedded into the simulations we build depending on what assumptions and simplifications we make.</p>
+
+<p>Aside from the mathematical equations that we may want to use in a simulation, we may also want to incorporate some degree of randomness. If there is a 30% chance of picking a winning ticket in a lottery, we could model this using a random number generator (also called an RNG)<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. We can write this program such that the RNG would output any number between 0 and 9, where 0, 1, and 2 represent a winning ticket. The output every time this program ran would be different. We could implement this in C with the <a href="https://man.cs50.io/3/random"><code class="language-plaintext highlighter-rouge">rand()</code></a> and <a href="https://man.cs50.io/3/srandom"><code class="language-plaintext highlighter-rouge">srand()</code></a>functions. In <code class="language-plaintext highlighter-rouge">rand()</code>’s documentation, we can see that <code class="language-plaintext highlighter-rouge">rand()</code> actually produces the same random numbers on every run, unless we specify a “seed” or initializer using <code class="language-plaintext highlighter-rouge">srand()</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Use current time as seed for random generator</span>
+    <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="c1">// Picks a number between 0 and 9</span>
+    <span class="kt">int</span> <span class="n">ticket</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="c1">// Prints the ticket number</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%i </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ticket</span><span class="p">);</span>
+
+    <span class="c1">// Decides fate</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ticket</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"You won!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"You lost!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="the-digital-divide">The Digital Divide</h2>
+
+<p>The digital divide describes the disparity between those who have access to technology and those who do not, including but not limited to access to a computer, the internet, or other hardware and software. Internet access varies between socioeconomic, geographic, and demographic characteristics, as well as between countries. It even more broadly describes the uneven distribution of usage between groups by socioeconomic status, race, gender, and geographical location. But it isn’t just groups that are affected by the digital divide. Within a group or community too, there are individuals who do have access or have limited access to computers and the internet.</p>
+
+<p>There are many factors that contribute to the digital divide, such as:</p>
+<ul>
+  <li>physical accessibility</li>
+  <li>financial accessibility</li>
+  <li>accessibility for individuals with disabilities</li>
+  <li>cognitive accessibility</li>
+  <li>etc.</li>
+</ul>
+
+<p>Solutions are rarely addressed at scale because because there is often “bigger fish to fry”. Human needs such as food supply and health care take precedence over digital inclusion.</p>
+
+<p>When we consider technological resources and solutions, we need to consider who has access? Who benefits from this technology? Furthermore, are these concerns that are occurring locally for a particular solution or globally? Ultimately, we as individuals along with organizations and governments have the power to improve or worsen this divide. The digital divide often raises issues of equity, access, and influence, both globally and locally.</p>
+
+<h2 id="ethics-and-legalities-of-computing">Ethics and Legalities of Computing</h2>
+
+<p>As with any technology or medium, using computing to harm individuals or groups of people raises legal and ethical concerns. Computing innovations and computing more generally, can play a role in social and political issues, which in turn often raise legal and ethical concerns. One such example is the existence of computing devices that collect and analyze data by continuously monitoring activities. Devices, websites, and networks can even collect information about a user’s location. Disparate personal data, such as geolocation, cookies, and browsing history, can be aggregated to create knowledge about an individual. Not only can programs collect your location and record where you have been, but they can also collect information on how you got there, and how long you were at a given location.</p>
+
+<p>Intellectual property refers to creations of the human mind. Things like trademarks, copyrights, and patents are all forms of intellectual property. Digital content is also subject to the laws around intellectual property. Content created on a computer is considered the intellectual property of the creator or organization.</p>
+
+<p>Technology has made it easier than ever to create and distribute our creative works, but this is a two way street. With ease of access and distribution comes ease of unauthorized use and modification. Tools like BitTorrent and LimeWire are some such tools that enabled to peer to peer sharing of files, which were typically illegal copies of music, movies, and other digital media. This often brings up well warranted concerns of ownership, value, and use when it comes to digital information. Do you really own a movie that you purchased on Amazon Prime, or that song you bought on iTunes? If you then burn that to a disk or flash drive and give it to a friend, do they also have ownership of that property? You may seen a warning like the one below shown before the start of a movie. This is one measure taken to make user’s aware of the legal implications of unauthorized use.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/warning.jpg" alt="warning" /></p>
+
+<p>In a professional setting, most companies and organizations have employees sign contracts with an intellectual property clause. Typically, digital content you produce on the job is the property of the company or organization. Even in a personal setting it is a good idea to consider different measures to safeguard your own intellectual property. This could be as simple as encrypting your data or storing it somewhere that has taken other measures to protect your data.</p>
+
+<h2 id="legal-use">Legal Use</h2>
+
+<p>There are ways to use others work legally. These products are typically labelled as open source or open access or licensed under the Creative Commons license. These licenses and labels allow us access to information that we may not have had access to otherwise, as well as contribute to this base of information for others to use.</p>
+
+<p>CS50’s own curriculum is licensed under the Creative Commons’ Attribution-NonCommercial-ShareAlike license. In short, anyone can use, share, or modify our work legally, so long as they credit us and distribute their work under the same license.</p>
+
+<p><img src="/curriculum/impact_of_computing/notes/cc.png" alt="creative commons" /></p>
+
+<p>The term open source is used to describe programs that are not only free to access and use but also to modify and extend for any purpose. Python is considered an open source software. People are continuously building and adding other features and modules to adapt it to their needs.</p>
+
+<p>Open access refers to research output that is free of any and all restrictions. The <a href="https://dp.la/">Digital Public Library of America</a> for is one such example, whereby users have access to millions of multimedia resources without restriction.</p>
+
+<p>Regardless of how the information or material is licensed or labelled, it is a good idea to cite all sources, just as you would in a paper in your English class. Simply supplying a link to the site in a comment of your code can suffice.</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>In the exam reference sheet for the AP CSP exam, the syntax for a random number generator is <code class="language-plaintext highlighter-rouge">RANDOM(a, b)</code> where the return value is any number between <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>, inclusive. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

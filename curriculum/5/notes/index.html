@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Lecture 5">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Lecture 5</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="lecture-5">Lecture 5</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#networking" id="markdown-toc-networking">Networking</a></li>
+  <li><a href="#http" id="markdown-toc-http">HTTP</a></li>
+  <li><a href="#html" id="markdown-toc-html">HTML</a></li>
+  <li><a href="#forms" id="markdown-toc-forms">Forms</a></li>
+  <li><a href="#css" id="markdown-toc-css">CSS</a></li>
+  <li><a href="#javascript" id="markdown-toc-javascript">JavaScript</a></li>
+</ul>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+  <li>Today we’ll transition from building command-line programs in C to web applications, and though we’ll see new languages, many ideas and concepts will stay the same.</li>
+  <li><strong>TCP/IP</strong> (Transmission Control Protocol and Internet Protocol) are two protocols, or rules that specify how computers can communicate with each other. The modern internet relies on these protocols to work.</li>
+  <li>We might have sent handwritten letters in the mail in the past. On the outside of the envelope, we need to write an address, including information like a name, street, and city. We also write our own name and address as the return address.</li>
+  <li>Each address, too, should uniquely identify a building or place.</li>
+  <li>Our computers also have addresses that uniquely identify them on the internet, called IP addresses. In IPv4, or version 4 of the protocol, these addresses are numbers in the format <code class="language-plaintext highlighter-rouge">#.#.#.#</code>, four numbers between 0 and 255 separated by dots. And to represent each number (with 256 possible values), we need exactly 8 bits, and so each IP address is made of 32 bits. But with 32 bits, we can only represent 4 billion values. And since there are more than 4 billion devices connected to the internet, we have a newer version of the protocol, IPv6, which has 128-bit addresses, that the world is starting to transition to.</li>
+  <li>A <strong>server</strong>, which is just a computer connected to the internet that can listen for and respond to messages, might provide many services, such as a web site or email. To specify that a message is intended for a particular service, such as web browsing, another number called the port number is added to the address. For example, HTTP, for browsing websites, is usually communicated with port 80. So an envelope with a message might have <code class="language-plaintext highlighter-rouge">1.2.3.4:80</code> as the destination address, and <code class="language-plaintext highlighter-rouge">5.6.7.8</code> as the return address.  And there are other complexities, but that’s the basics of how computers can communicate over a network.</li>
+  <li>Let’s say we wanted to visit a <strong>URL</strong>, Uniform Resource Locator, like <code class="language-plaintext highlighter-rouge">http://www.example.com/</code>. It turns out that there’s another technology called DNS, Domain Name System, that many internet providers and organizations maintain, which converts domain names (like <code class="language-plaintext highlighter-rouge">example.com</code>) into IP addresses.
+    <ul>
+      <li>There are actually now hundreds of TLDs, top-level domains in addition to <code class="language-plaintext highlighter-rouge">.com</code>, such as <code class="language-plaintext highlighter-rouge">.net</code>, <code class="language-plaintext highlighter-rouge">.org</code>, <code class="language-plaintext highlighter-rouge">.us</code>, <code class="language-plaintext highlighter-rouge">.uk</code>, and more.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">www</code> in front of a domain name is actually a subdomain, and there might be many of them created, each of which pointing to a different server or set of servers. It’s not required, and <code class="language-plaintext highlighter-rouge">www</code> is only used by convention. For example, MIT uses <code class="language-plaintext highlighter-rouge">web.mit.edu</code> for their main website’s address.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">/</code> at the end implies that we’re asking for the root page of the site, which is conventionally <code class="language-plaintext highlighter-rouge">index.html</code>, where <code class="language-plaintext highlighter-rouge">.html</code> indicates that the file is written in HTML, a language we’ll soon look at.</li>
+    </ul>
+  </li>
+  <li>When we type that URL in a browser, our browser first uses DNS to look up the IP address for that domain, and then sends a request (in a virtual envelope) to the right IP address for the website. And when the server at that address responds, it will send us the content of the website in a virtual envelope with our address as the destination.</li>
+</ul>
+
+<h2 id="http">HTTP</h2>
+
+<ul>
+  <li><strong>HTTP</strong>, Hypertext Transfer Protocol, is another set of rules and conventions for communicating. HTTP is considered a computing innovation. For example, humans might have the convention of shaking hands when meeting for the first (or subsequent) times. When our browser communicates to web servers through HTTP, too, both computers follow a protocol for making requests and responses.</li>
+  <li>A request for a webpage will look like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: www.example.com
+...
+</code></pre></div>    </div>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GET</code> is an HTTP verb that indicates we want to fetch some resource. The <code class="language-plaintext highlighter-rouge">/</code> indicates we’re looking for the default page, and <code class="language-plaintext highlighter-rouge">HTTP/1.1</code> indicates the version of HTTP our browser is using.</li>
+      <li>Then, <code class="language-plaintext highlighter-rouge">Host: www.example.com</code> is included, since the same server might be listening for and responding to requests for multiple websites. There are also other pieces of information included in the <code class="language-plaintext highlighter-rouge">...</code>, to help the server respond to us appropriately.</li>
+    </ul>
+  </li>
+  <li>The response from the server might look like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Content-Type: text/html
+...
+</code></pre></div>    </div>
+    <ul>
+      <li>First, we get back the version of HTTP, <code class="language-plaintext highlighter-rouge">HTTP/1.1</code>. Then, <code class="language-plaintext highlighter-rouge">200</code> is a numeric code that means <code class="language-plaintext highlighter-rouge">OK</code>, that the server was able to understand and respond to the request.</li>
+      <li><code class="language-plaintext highlighter-rouge">Content-Type: text/html</code> indicates that the content of the response is in the language called HTML, in text format.</li>
+    </ul>
+  </li>
+  <li>We can open a browser like Chrome, and open the Developer Tools with View &gt; Developer &gt; Developer Tools. A panel will open:<br />
+<img src="/curriculum/5/notes/network.png" alt="panel in Chrome with various tabs" />
+    <ul>
+      <li>We can click the Network tab, and if we type <code class="language-plaintext highlighter-rouge">harvard.edu</code> into the address bar and press enter, a lot will happen very quickly. We can scroll to the very top, click the first request for <code class="language-plaintext highlighter-rouge">harvard.edu</code>, and see in the right panel, under “Request Headers”, that the browser indeed sends a request that starts with what we expected:<br />
+<img src="/curriculum/5/notes/request.png" alt="request in Chrome" /></li>
+    </ul>
+  </li>
+  <li>We can scroll in the same panel and see that the response headers are slightly different:<br />
+<img src="/curriculum/5/notes/response.png" alt="response in Chrome" />
+    <ul>
+      <li>The response code, <code class="language-plaintext highlighter-rouge">301</code>, seems to say “Moved Permanently”. And if we look down to “Location:”, we see that the new location is <code class="language-plaintext highlighter-rouge">https://www.harvard.edu</code>. There’s a <code class="language-plaintext highlighter-rouge">www</code>, and also a different protocol, HTTPS, which will encrypt our communication more securely.</li>
+    </ul>
+  </li>
+  <li>Another HTTP code, <code class="language-plaintext highlighter-rouge">404</code>, is “Not Found”, and we get that back if we’re trying to get some URL that the server can’t find. These are some interesting ones:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">200 OK</code></li>
+      <li><code class="language-plaintext highlighter-rouge">301 Moved Permanently</code></li>
+      <li><code class="language-plaintext highlighter-rouge">302 Found</code></li>
+      <li><code class="language-plaintext highlighter-rouge">304 Not Modified</code></li>
+      <li><code class="language-plaintext highlighter-rouge">401 Unauthorized</code></li>
+      <li><code class="language-plaintext highlighter-rouge">403 Forbidden</code></li>
+      <li><code class="language-plaintext highlighter-rouge">404 Not Found</code></li>
+      <li><code class="language-plaintext highlighter-rouge">418 I'm a Teapot</code></li>
+      <li><code class="language-plaintext highlighter-rouge">500 Internal Server Error</code></li>
+      <li><code class="language-plaintext highlighter-rouge">...</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="html">HTML</h2>
+
+<ul>
+  <li>Now that our computers can communicate, we can start thinking about creating the content that websites are comprised of.</li>
+  <li><strong>HTML</strong>, Hypertext Markup Language, is a standard with which webpages are written. It’s interpreted by browsers from top to bottom, and each line might have some text, image, or styling instructions.</li>
+  <li>In our browser, we can click View &gt; Developer &gt; View Source on a website to see the HTML that drives websites:<br />
+<img src="/curriculum/5/notes/view_source.png" alt="view source in Chrome for CS50" />
+    <ul>
+      <li>We can see that this is just text, and the first line, <code class="language-plaintext highlighter-rouge">&lt;!DOCTYPE html&gt;</code>, indicates to browsers that the page is written in HTML.</li>
+      <li>Then, we see a pattern of lines and indentations, and many tags that start with <code class="language-plaintext highlighter-rouge">&lt;</code> and end with <code class="language-plaintext highlighter-rouge">&gt;</code>. First, we have the <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code> tag, and nested inside is a <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> tag, which will include information about the webpage, that might not necessarily appear.</li>
+      <li>Then, we eventually see a <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> tag, which will have the content of the webpage.</li>
+    </ul>
+  </li>
+  <li>We can look at a simple example:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>
+            hello, title
+        <span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        hello, body
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Inside the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of the webpage, we have a <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> tag that indicates the title of our webpage, “hello, title”. And then, we have a line with <code class="language-plaintext highlighter-rouge">&lt;/title&gt;</code>, which is a closing tag that indicates the end of the title.</li>
+      <li>Notice that the indentation and opening and closing tags are symmetric. Like in C, the whitespace is not necessary, but stylistically important.</li>
+      <li>The content of this page is just “hello, body”.</li>
+    </ul>
+  </li>
+  <li>With the text editor in CS50 IDE, we can create and save a file called <code class="language-plaintext highlighter-rouge">index.html</code> with our example code. The CS50 IDE is web-based, and it can run a web server, which is a program that can listen for and respond to web requests.</li>
+  <li>We can run a server in the terminal, called <code class="language-plaintext highlighter-rouge">http-server</code>, a free and open-source package. If we run that command, we’ll see some information:<br />
+<img src="/curriculum/5/notes/http_server.png" alt="http-server in terminal in CS50 IDE" />
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">./</code> is the current directory, and in this case we are in our <code class="language-plaintext highlighter-rouge">~/workspace/</code> folder.</li>
+      <li>Then, we see a URL to our IDE’s web server, and since we want to serve these files separately from the IDE itself, the URL ends in <code class="language-plaintext highlighter-rouge">:8080</code>, indicating that we’re using port number 8080.</li>
+      <li>If we click that link, we’ll see a page that says <code class="language-plaintext highlighter-rouge">Index of /</code> with the files in our workspace. We can click on <code class="language-plaintext highlighter-rouge">index.html</code> and see our page. We can also change the code in our editor, save, and refresh to see our changes. Since HTML is interpreted by our browser, we don’t need to compile it.</li>
+    </ul>
+  </li>
+  <li>Let’s take a look at examples of other tags:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"cat.jpg"</span><span class="nt">&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Images can be included with the <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> tag, and <code class="language-plaintext highlighter-rouge">src</code> is an attribute on the tag that modifies it. In this case, it will specify the source of the image, and the value can be a file or other URL. (In the CS50 IDE, we should upload a file called <code class="language-plaintext highlighter-rouge">cat.jpg</code> in our workspace folder for this to work.) Finally, we don’t close image tags (and other “empty tags”), since there’s nothing else inside the element.</li>
+      <li>We can also add another attribute tag, <code class="language-plaintext highlighter-rouge">alt</code>, to add alternative text for the image. So our image will look like this: <code class="language-plaintext highlighter-rouge">&lt;img alt="photo of cat" src="cat.jpg"&gt;</code></li>
+    </ul>
+  </li>
+  <li>We can add links with something like <code class="language-plaintext highlighter-rouge">Visit &lt;a href="https://www.harvard.edu/"&gt;Harvard&lt;/a&gt;.</code> in our body. The <code class="language-plaintext highlighter-rouge">Visit</code> and <code class="language-plaintext highlighter-rouge">Harvard</code> pieces are just text, but the <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> tag surrounding <code class="language-plaintext highlighter-rouge">Harvard</code> is an anchor tag, which specifies a link with the <code class="language-plaintext highlighter-rouge">href</code> attribute. In fact, we can phish, or trick, people, into clicking a link to a site that isn’t really what they expect. A bad actor could even copy the HTML of some site, and create a site of their own that appears to be the same. (Though, they won’t have access to the code and data stored on the server.)</li>
+  <li>We can wrap text with the <code class="language-plaintext highlighter-rouge">&lt;strong&gt;</code> tag to tell browsers to make it bolder.</li>
+  <li>There’s also the <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> tag for paragraphs:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>paragraphs<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in tincidunt augue. Duis imperdiet, justo ac iaculis rhoncus, erat elit dignissim mi, eu interdum velit sapien nec risus. Praesent ullamcorper nibh at volutpat aliquam. Nam sed aliquam risus. Nulla rutrum nunc augue, in varius lacus commodo in. Ut tincidunt nisi a convallis consequat. Fusce sed pulvinar nulla.
+        <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            Ut tempus rutrum arcu eget condimentum. Morbi elit ipsum, gravida faucibus sodales quis, varius at mi. Suspendisse id viverra lectus. Etiam dignissim interdum felis quis faucibus. Integer et vestibulum eros, non malesuada felis. Pellentesque porttitor eleifend laoreet. Duis sit amet pellentesque nisi. Aenean ligula mauris, volutpat sed luctus in, consectetur id turpis. Phasellus mattis dui ac metus blandit volutpat. Donec lorem arcu, sollicitudin in risus a, imperdiet condimentum augue. Ut at facilisis mauris. Curabitur sagittis augue in dictum gravida. Integer sed sem sed justo tempus ultrices eu non magna. Phasellus semper eros erat, a posuere nisi auctor et. Praesent dignissim orci aliquam laoreet scelerisque.
+        <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            Mauris eget erat arcu. Maecenas ac ante vel ipsum bibendum varius. Nunc tristique nulla eget tincidunt molestie. Morbi sed mauris eu lectus vehicula iaculis ac id lacus. Etiam sit amet magna massa. In pulvinar sapien ac mi ultrices, quis consequat nisl hendrerit. Aliquam pharetra nec sem non vehicula. In et risus leo. Ut tristique ornare nisl et lacinia.
+        <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Without the <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> tags, all of these lines would be displayed together on the page, since HTML ignores whitespace like new lines, and instead combines them to at most one space.</li>
+    </ul>
+  </li>
+  <li>We look at a few more tags from HTML like headings (<code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> through <code class="language-plaintext highlighter-rouge">&lt;h6&gt;</code> indicating the level of heading) and tables (<code class="language-plaintext highlighter-rouge">&lt;table&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;tr&gt;</code> for rows, <code class="language-plaintext highlighter-rouge">&lt;td&gt;</code> for cells), but through practice and documentation, we can learn to use them fully. Once we understand the pattern of tags and attributes, we can write our own HTML.</li>
+  <li>We can use tools like the <a href="https://validator.w3.org/">W3C Markup Validator</a> to check that our HTML is valid.</li>
+</ul>
+
+<h2 id="forms">Forms</h2>
+
+<ul>
+  <li>On Google, if we search for something, we get redirected to a long URL. It turns out that the URL has our search term in it, and going to a link like <code class="language-plaintext highlighter-rouge">https://www.google.com/search?q=cats</code> will bring us directly to the results page for a search for “cats”.
+    <ul>
+      <li>The page is called <code class="language-plaintext highlighter-rouge">search</code>, and that goes to code on their servers that generates a response for that page dynamically and programmatically.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">?</code> in the URL adds additional input for the page, and <code class="language-plaintext highlighter-rouge">q=cats</code> is telling the server that we are passing in “cats” for the input (search box in this case) with the name “q”, which probably stands for “query”.</li>
+    </ul>
+  </li>
+  <li>We can write the HTML for a form that takes us to the Google search results for some user input:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>search<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"https://www.google.com/search"</span> <span class="na">method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"q"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>With the <code class="language-plaintext highlighter-rouge">form</code> tag, we can create a form. The <code class="language-plaintext highlighter-rouge">action</code> attribute tells the browser where the form should go, and the <code class="language-plaintext highlighter-rouge">method</code> attribute indicates how to send the form inputs.</li>
+      <li>The first <code class="language-plaintext highlighter-rouge">input</code> tag is a text box, which we will name <code class="language-plaintext highlighter-rouge">q</code> so that it can be sent to Google correctly, and the second <code class="language-plaintext highlighter-rouge">input</code> tag is a submit button that we’ll label “Search”.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="css">CSS</h2>
+
+<ul>
+  <li>While HTML is used for layout and structure, <strong>CSS</strong>, Cascading Style Sheets, is another language we can use to style, or change the aesthetics, of our webpages.</li>
+  <li>Let’s take a look at <code class="language-plaintext highlighter-rouge">css0.html</code>:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>css0<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;header</span> <span class="na">style=</span><span class="s">"font-size: large; text-align: center;"</span><span class="nt">&gt;</span>
+            John Harvard
+        <span class="nt">&lt;/header&gt;</span>
+        <span class="nt">&lt;main</span> <span class="na">style=</span><span class="s">"font-size: medium; text-align: center;"</span><span class="nt">&gt;</span>
+            Welcome to my home page!
+        <span class="nt">&lt;/main&gt;</span>
+        <span class="nt">&lt;footer</span> <span class="na">style=</span><span class="s">"font-size: small; text-align: center;"</span><span class="nt">&gt;</span>
+            Copyright <span class="ni">&amp;#169;</span> John Harvard
+        <span class="nt">&lt;/footer&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Here, for each of these tags, we’ve added a <code class="language-plaintext highlighter-rouge">style</code> attribute and some set of key-value pairs as the value that will apply to just those elements. These pairs, like <code class="language-plaintext highlighter-rouge">font-size: large;</code>, are setting CSS properties and can change many aesthetic aspects of elements.</li>
+      <li>Notice that we have semantic, or meaningful, tags like <code class="language-plaintext highlighter-rouge">&lt;header&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;main&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;footer&gt;</code> that separates our page into sections.</li>
+    </ul>
+  </li>
+  <li>Since CSS is inherited by nested elements in HTML, we can factor out the common styles:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>css1<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">"text-align: center;"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;header</span> <span class="na">style=</span><span class="s">"font-size: large;"</span><span class="nt">&gt;</span>
+            John Harvard
+        <span class="nt">&lt;/header&gt;</span>
+        <span class="nt">&lt;main</span> <span class="na">style=</span><span class="s">"font-size: medium;"</span><span class="nt">&gt;</span>
+            Welcome to my home page!
+        <span class="nt">&lt;/main&gt;</span>
+        <span class="nt">&lt;footer</span> <span class="na">style=</span><span class="s">"font-size: small;"</span><span class="nt">&gt;</span>
+            Copyright <span class="ni">&amp;#169;</span> John Harvard
+        <span class="nt">&lt;/footer&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Here, the <code class="language-plaintext highlighter-rouge">text-align: center;</code> style is applied to the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> element, so it will cascade, or be inherited by each element inside <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>.</li>
+    </ul>
+  </li>
+  <li>We can factor out CSS into the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>, with CSS classes:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;style&gt;</span>
+
+            <span class="nc">.centered</span>
+            <span class="p">{</span>
+                <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nc">.large</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="nb">large</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nc">.medium</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="nb">medium</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nc">.small</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="n">small</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/style&gt;</span>
+        <span class="nt">&lt;title&gt;</span>css2<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body</span> <span class="na">class=</span><span class="s">"centered"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"large"</span><span class="nt">&gt;</span>
+            John Harvard
+        <span class="nt">&lt;/header&gt;</span>
+        <span class="nt">&lt;main</span> <span class="na">class=</span><span class="s">"medium"</span><span class="nt">&gt;</span>
+            Welcome to my home page!
+        <span class="nt">&lt;/main&gt;</span>
+        <span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"small"</span><span class="nt">&gt;</span>
+            Copyright <span class="ni">&amp;#169;</span> John Harvard
+        <span class="nt">&lt;/footer&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Now, the HTML in the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> specifies a <code class="language-plaintext highlighter-rouge">class</code> for each element, but all the CSS for the styling has been moved to the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>, so we can compartmentalize it more easily. And in CSS, we use <code class="language-plaintext highlighter-rouge">.something</code> to apply properties to elements with a class of <code class="language-plaintext highlighter-rouge">something</code>. Each class, too, can have many CSS properties, not just one.</li>
+    </ul>
+  </li>
+  <li>We could even apply CSS to all elements of a certain type, using CSS selectors:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;style&gt;</span>
+
+            <span class="nt">body</span>
+            <span class="p">{</span>
+                <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nt">header</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="nb">large</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nt">main</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="nb">medium</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nt">footer</span>
+            <span class="p">{</span>
+                <span class="nl">font-size</span><span class="p">:</span> <span class="n">small</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/style&gt;</span>
+        <span class="nt">&lt;title&gt;</span>css3<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;header&gt;</span>
+            John Harvard
+        <span class="nt">&lt;/header&gt;</span>
+        <span class="nt">&lt;main&gt;</span>
+            Welcome to my home page!
+        <span class="nt">&lt;/main&gt;</span>
+        <span class="nt">&lt;footer&gt;</span>
+            Copyright <span class="ni">&amp;#169;</span> John Harvard
+        <span class="nt">&lt;/footer&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Notice that now we can use <code class="language-plaintext highlighter-rouge">body</code> and <code class="language-plaintext highlighter-rouge">header</code> to select those elements, without attaching a class to them in the HTML.</li>
+    </ul>
+  </li>
+  <li>Finally, we can include external stylesheets, or CSS in separate files, that multiple HTML pages can include and share:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"css4.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>css4<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;header&gt;</span>
+            John Harvard
+        <span class="nt">&lt;/header&gt;</span>
+        <span class="nt">&lt;main&gt;</span>
+            Welcome to my home page!
+        <span class="nt">&lt;/main&gt;</span>
+        <span class="nt">&lt;footer&gt;</span>
+            Copyright <span class="ni">&amp;#169;</span> John Harvard
+        <span class="nt">&lt;/footer&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We need to create a file called <code class="language-plaintext highlighter-rouge">css4.css</code>, and place our CSS code inside that, for this to work. But now we can use the <code class="language-plaintext highlighter-rouge">&lt;link&gt;</code> tag to include it.</li>
+      <li>There are tradeoffs, too, to having separated CSS files, since a simple webpage may not need the additional complexity and overhead of a linked stylesheet. But having separation of concerns allows for easier collaboration and clearer organization of code.</li>
+    </ul>
+  </li>
+  <li>Phew, we covered lots of concepts here! But, now that we’re familiar with some of these patterns, we can learn to use additional features by reading examples and documentation online.</li>
+</ul>
+
+<h2 id="javascript">JavaScript</h2>
+
+<ul>
+  <li><strong>JavaScript</strong>, a programming language, can be used on our webpages to make them more dynamic. The user’s browser runs the JavaScript code we write, to make changes to the page.</li>
+  <li>JavaScript is similar to C, and is interpreted by a browser from top to bottom.</li>
+  <li>Many of the programming elements are the same:
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We use the <code class="language-plaintext highlighter-rouge">let</code> keyword in JavaScript to initialize a variable, and we don’t need to specify what the type of the variable will be.</li>
+    </ul>
+  </li>
+  <li>Adding 1 to a variable has the exact same syntax as it does in C.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">counter</span> <span class="o">=</span> <span class="nx">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Conditions and loops, too, are the same.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">y</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Our example webpage can be represented by a tree, in what’s called the DOM, Document Object Model:<br />
+<img src="/curriculum/5/notes/dom.png" alt="simple webpage mapped to a tree with each element as a node, nested" />
+    <ul>
+      <li>Notice that each node is an element on the page, and nested nodes show as children nodes. A browser, when it loads a webpage, automatically builds a tree in memory with elements from the HTML.</li>
+    </ul>
+  </li>
+  <li>With JavaScript, we can add or change any of these nodes in the DOM.</li>
+  <li>We can make an interactive page like the following:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+
+            <span class="kd">function</span> <span class="nx">greet</span><span class="p">()</span>
+            <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello, </span><span class="dl">'</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#name</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;title&gt;</span>hello1<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">onsubmit=</span><span class="s">"greet(); return false;"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">autocomplete=</span><span class="s">"off"</span> <span class="na">autofocus</span> <span class="na">id=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Name"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We have a form element in the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> with a text input and a submit button. But when the form is submitted, we want our browser to call a <code class="language-plaintext highlighter-rouge">greet()</code> function, and with <code class="language-plaintext highlighter-rouge">return false;</code>, we tell the browser to do nothing else with the form. So we put that into the <code class="language-plaintext highlighter-rouge">onsubmit</code> attribute of the form. Notice that we also have <code class="language-plaintext highlighter-rouge">id="name"</code> for the text input element. The <code class="language-plaintext highlighter-rouge">autocomplete="off"</code> attribute turns off the autocomplete in the browser, and <code class="language-plaintext highlighter-rouge">autofocus</code> selects the input box when the page is loaded so the user can start typing into it right away.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">greet()</code> function is defined in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of our page, inside a <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> tag that allows us to write our own JavaScript. In JavaScript, we can define a function with the <code class="language-plaintext highlighter-rouge">function</code> keyword, and if it takes no inputs, we can simply use <code class="language-plaintext highlighter-rouge">()</code>. And this function in turns calls the <code class="language-plaintext highlighter-rouge">alert()</code> function, which is built into browsers, to create an alert box.</li>
+      <li>The content of the alert box will be <code class="language-plaintext highlighter-rouge">hello, </code> plus the value of the element in the webpage (called <code class="language-plaintext highlighter-rouge">document</code>) with the ID <code class="language-plaintext highlighter-rouge">name</code>. The <code class="language-plaintext highlighter-rouge">querySelector</code> function is attached to the object that represents the webpage, so we call it with <code class="language-plaintext highlighter-rouge">document.querySelector()</code>. Then, the element that gets selected will also has an attribute called <code class="language-plaintext highlighter-rouge">value</code> that we can access with <code class="language-plaintext highlighter-rouge">.value</code>.</li>
+    </ul>
+  </li>
+  <li>We look at another example, that can change the style of a webpage:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>background<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"red"</span><span class="nt">&gt;</span>R<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"green"</span><span class="nt">&gt;</span>G<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"blue"</span><span class="nt">&gt;</span>B<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+
+            <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">body</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#red</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+            <span class="p">};</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#green</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+            <span class="p">};</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#blue</span><span class="dl">'</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">;</span>
+            <span class="p">};</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>It turns out that we can attach JavaScript functions to events in the browser, like the following:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">blur</code></li>
+      <li><code class="language-plaintext highlighter-rouge">change</code></li>
+      <li><code class="language-plaintext highlighter-rouge">click</code></li>
+      <li><code class="language-plaintext highlighter-rouge">drag</code></li>
+      <li><code class="language-plaintext highlighter-rouge">focus</code></li>
+      <li><code class="language-plaintext highlighter-rouge">keypress</code></li>
+      <li><code class="language-plaintext highlighter-rouge">load</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mousedown</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mouseover</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mouseup</code></li>
+      <li><code class="language-plaintext highlighter-rouge">submit</code></li>
+      <li><code class="language-plaintext highlighter-rouge">touchmove</code></li>
+      <li><code class="language-plaintext highlighter-rouge">unload</code></li>
+      <li><code class="language-plaintext highlighter-rouge">...</code></li>
+    </ul>
+  </li>
+  <li>We can add code called event listeners to elements like <code class="language-plaintext highlighter-rouge">document.querySelector('#red')</code>. The <code class="language-plaintext highlighter-rouge">onclick</code> value of each element can be a function that is automatically called by the browser, when the element is clicked. And the function attached doesn’t have a name, but is defined with <code class="language-plaintext highlighter-rouge">function() {}</code>.</li>
+  <li>With <code class="language-plaintext highlighter-rouge">body.style.backgroundColor</code>, we can access the <code class="language-plaintext highlighter-rouge">style</code> of the <code class="language-plaintext highlighter-rouge">body</code>, and set its <code class="language-plaintext highlighter-rouge">backgroundColor</code> value.</li>
+  <li>We can change the font size, too:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>size<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in tincidunt augue. Duis imperdiet, justo ac iaculis rhoncus, erat elit dignissim mi, eu interdum velit sapien nec risus. Praesent ullamcorper nibh at volutpat aliquam. Nam sed aliquam risus. Nulla rutrum nunc augue, in varius lacus commodo in. Ut tincidunt nisi a convallis consequat. Fusce sed pulvinar nulla.
+        <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;select&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"xx-large"</span><span class="nt">&gt;</span>xx-large<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"x-large"</span><span class="nt">&gt;</span>x-large<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"large"</span><span class="nt">&gt;</span>large<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">selected</span> <span class="na">value=</span><span class="s">"initial"</span><span class="nt">&gt;</span>initial<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"small"</span><span class="nt">&gt;</span>small<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"x-small"</span><span class="nt">&gt;</span>x-small<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"xx-small"</span><span class="nt">&gt;</span>xx-small<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;/select&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">).</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">body</span><span class="dl">'</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+            <span class="p">};</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We have a set of <code class="language-plaintext highlighter-rouge">option</code> elements in a <code class="language-plaintext highlighter-rouge">select</code> (a dropdown menu in HTML that we can look up the documentation for) and now, whenever the <code class="language-plaintext highlighter-rouge">select</code> element is changed, we set the <code class="language-plaintext highlighter-rouge">fontSize</code> of the <code class="language-plaintext highlighter-rouge">style</code> of the <code class="language-plaintext highlighter-rouge">body</code> element. We set that value to <code class="language-plaintext highlighter-rouge">this.value</code>, and <code class="language-plaintext highlighter-rouge">this</code> refers to the <code class="language-plaintext highlighter-rouge">select</code> element when the function is called, since the function is called from that element.</li>
+    </ul>
+  </li>
+  <li>We can write a page with an element that blinks, or appears and disappears repeatedly:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+
+            <span class="c1">// Toggles visibility of greeting</span>
+            <span class="kd">function</span> <span class="nx">blink</span><span class="p">()</span>
+            <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">body</span><span class="dl">'</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">hidden</span><span class="dl">'</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">visible</span><span class="dl">'</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hidden</span><span class="dl">'</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1">// Blink every 500ms</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="nx">blink</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;title&gt;</span>blink<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        hello, world
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We use the <code class="language-plaintext highlighter-rouge">visibility</code> attribute to make the <code class="language-plaintext highlighter-rouge">body</code> visible or hidden, and <code class="language-plaintext highlighter-rouge">window.setInterval</code> to call this function every 500 milliseconds.</li>
+    </ul>
+  </li>
+  <li>Browsers also have a geolocation function, which we can call to get the user’s current location:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>geolocation<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+
+            <span class="nb">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">latitude</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
+            <span class="p">});</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">navigator</code> refers to the user’s browser, and the <code class="language-plaintext highlighter-rouge">geolocation.getCurrentPosition</code> function will return a <code class="language-plaintext highlighter-rouge">position</code> object. When we get that <code class="language-plaintext highlighter-rouge">position</code> object, we want to call a function that will then write the <code class="language-plaintext highlighter-rouge">latitude</code> and <code class="language-plaintext highlighter-rouge">longitude</code> values to the document.</li>
+    </ul>
+  </li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Internet">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Internet</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="internet">Internet</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#ip" id="markdown-toc-ip">IP</a></li>
+  <li><a href="#dns" id="markdown-toc-dns">DNS</a></li>
+  <li><a href="#packets" id="markdown-toc-packets">Packets</a></li>
+  <li><a href="#tcpip" id="markdown-toc-tcpip">TCP/IP</a></li>
+  <li><a href="#ports" id="markdown-toc-ports">Ports</a></li>
+  <li><a href="#protocols" id="markdown-toc-protocols">Protocols</a></li>
+  <li><a href="#udp" id="markdown-toc-udp">UDP</a></li>
+  <li><a href="#ips-in-more-detail" id="markdown-toc-ips-in-more-detail">IPs in More Detail</a></li>
+  <li><a href="#routers" id="markdown-toc-routers">Routers</a></li>
+  <li><a href="#traceroute" id="markdown-toc-traceroute">Traceroute</a></li>
+  <li><a href="#undersea-cabling" id="markdown-toc-undersea-cabling">Undersea Cabling</a></li>
+  <li><a href="#cable-modem-demo" id="markdown-toc-cable-modem-demo">Cable Modem Demo</a></li>
+  <li><a href="#network-switch-demo" id="markdown-toc-network-switch-demo">Network Switch Demo</a></li>
+  <li><a href="#home-router-demo" id="markdown-toc-home-router-demo">Home Router Demo</a></li>
+  <li><a href="#network-cable-demo" id="markdown-toc-network-cable-demo">Network Cable Demo</a></li>
+  <li><a href="#ap-csp-terminology" id="markdown-toc-ap-csp-terminology">AP CSP Terminology</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<ul>
+  <li>We use the internet on a daily basis and have constant access and connectivity</li>
+  <li>
+    <p>Home network</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/homenetwork.png" alt="home network" /></p>
+
+    <ul>
+      <li>Cable modem, DSL modem, or FIOS device
+        <ul>
+          <li>Connects to the internet</li>
+          <li>Pay monthly for an ISP (Internet Service Provider)
+            <ul>
+              <li>Verizon, Comcast, etc.</li>
+            </ul>
+          </li>
+          <li>Could have built in wireless connectivity for your devices
+            <ul>
+              <li>May need an additional home router
+                <ul>
+                  <li>Devices connect to a router via cables or wifi</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ip">IP</h2>
+
+<ul>
+  <li>Every computer on the internet has an IP (Internet Protocol) address
+    <ul>
+      <li>Of the form #.#.#.#
+        <ul>
+          <li>Four numbers separated by dots of the values 0-255</li>
+          <li>Other IP address formats exist today as well</li>
+        </ul>
+      </li>
+      <li>Like postal addresses, they uniquely identify computers on the internet
+        <ul>
+          <li>Any device connected to the internet has an IP address
+            <ul>
+              <li>Allows other computers to talk to it</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>ISPs assign a IP address to your computer (router)
+    <ul>
+      <li>Used to be physically configured</li>
+      <li>DHCP (Dynamic Host Configuration Protocol)
+        <ul>
+          <li>Software that ISPs provides to allow your computer to request an IP address</li>
+          <li>DHCP servers respond with a specific IP address for your Home</li>
+        </ul>
+      </li>
+      <li>Multiple devices can connect to your home network
+        <ul>
+          <li>The home router supports DHCP and assigns IP addresses to your devices</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dns">DNS</h2>
+
+<ul>
+  <li>We access websites using domain names (Facebook.com, Google.com, etc.), but it turns out that these sites too have IP addresses</li>
+  <li>DNS (Domain Name System) servers convert domain names into IP addresses</li>
+</ul>
+
+<h2 id="packets">Packets</h2>
+
+<ul>
+  <li>Computers communicate by sending packets, which are like virtual envelopes sent between computers
+    <ul>
+      <li>Ultimately still 0s and 1s</li>
+    </ul>
+  </li>
+  <li>The bandwidth (measured in bits/second) of a network defines the maximum amount of data that can be sent in fixed amount of time. You can check your network bandwidth by visiting <a href="https://fast.com">fast.com</a>.</li>
+  <li>As an analogy, suppose we want to find a cat image on the internet</li>
+  <li>So, we send a request to a server, say Google, like “get cat.jpg”
+    <ul>
+      <li>We place this request in an envelope</li>
+    </ul>
+  </li>
+  <li>On the envelope, we list out IP as the return address</li>
+  <li>However, for the recipient of the request, we don’t know the IP address for Google
+    <ul>
+      <li>Have to rely on DNS</li>
+      <li>Send a request to our ISPs DNS server for Google’s IP address
+        <ul>
+          <li>If the ISP’s DNS server doesn’t know a website’s IP address, it has been configured to ask another DNS server</li>
+          <li>There exist root servers that know where to look to for an IP address if it exists</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>After sending the request off, we’ll get a response ms later</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/happycat.jpg" alt="happy cat" /></p>
+  </li>
+  <li>The cat will be sent back in one or more packets
+    <ul>
+      <li>If the cat image is too large for a single envelope, sending it in one packet could take up internet traffic</li>
+      <li>To solve this, Google will divide the cat image into smaller fragments
+        <ul>
+          <li>Put the fragments into different envelopes</li>
+          <li>Write information on the envelopes
+            <ul>
+              <li>Return address: Google’s IP address</li>
+              <li>Delivery address: Our IP address</li>
+              <li>List the number of packets on each envelope (1 of 4, 2 of 4, etc.)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="tcpip">TCP/IP</h2>
+
+<ul>
+  <li>IP goes beyond addresses
+    <ul>
+      <li>Set of conventions computers and servers follow to allow intercommunication</li>
+    </ul>
+  </li>
+  <li>Fragmentation like in the envelope example are supported by IP
+    <ul>
+      <li>If missing a packet, you can logically infer which packet you’re missing based on the ones received
+        <ul>
+          <li>However, IP doesn’t tell computers what to do in this case</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TCP (Transmission Control Protocol) ensures packets can get to their destination
+    <ul>
+      <li>Commonly used with IP (TCP/IP)</li>
+      <li>Supports sequence numbers that help data get to its destination
+        <ul>
+          <li>When missing a packet, a computer can make a request for the missing packet</li>
+          <li>The computer will put packets together to get a whole file</li>
+        </ul>
+      </li>
+      <li>Also includes conventions for requesting services (port identifiers)
+        <ul>
+          <li>To make sure Google knows we’re requesting a webpage and not an email or other service</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ports">Ports</h2>
+
+<ul>
+  <li>Per TCP, the world has standardized numbers that represent different services</li>
+  <li>If 5.6.7.8 is Google’s IP address, 5.6.7.8;80 (port 80) lets use know that we want a webpage
+    <ul>
+      <li>80 means http (hypertext transfer protocol)
+        <ul>
+          <li>The language that web servers speak</li>
+        </ul>
+      </li>
+      <li>Google will send the request to their web server via http</li>
+    </ul>
+  </li>
+  <li>Many websites use secure connections with SSL or HTTPS, which uses the port 443</li>
+  <li>Certificate authorities issue digital certificates that validate the ownership of encryption keys used in secure communications and are based on a trust model.</li>
+  <li>Email uses port 25</li>
+  <li>Other ports exist as well</li>
+</ul>
+
+<h2 id="protocols">Protocols</h2>
+
+<ul>
+  <li>Protocols are just sets of rules
+    <ul>
+      <li>Humans use these all the time, such as the protocol for meeting people: handshakes</li>
+    </ul>
+  </li>
+  <li>The protocols used in the Internet are open, which allows users to easily connect additional computing devices to the Internet.</li>
+  <li>When a request is made to Google for an image, HTTP tells Google how to respond appropriately</li>
+  <li>The world wide web is an application used to view webpages, programs, and files that uses the HTTP protocol. These webpages are prefixed with <code class="language-plaintext highlighter-rouge">http://www</code>.</li>
+  <li>The world wide web uses the internet, which is a much larger system comprised of networks, connecting millions of computers.</li>
+</ul>
+
+<h2 id="udp">UDP</h2>
+
+<ul>
+  <li>User Datagram Protocol
+    <ul>
+      <li>Doesn’t guarantee delivery</li>
+      <li>Used for video conferencing such as FaceTime
+        <ul>
+          <li>Packets can be dropped for the sake of keeping the conversation flowing</li>
+        </ul>
+      </li>
+      <li>Used anytime you want to keep data coming without waiting for a buffer to fill</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ips-in-more-detail">IPs in More Detail</h2>
+
+<ul>
+  <li>IP addresses are limited
+    <ul>
+      <li>In the format #.#.#.#, each number is 8 bits, so 32 bits total
+        <ul>
+          <li>This yields 2<sup>32</sup> or about 4 billion possible addresses
+            <ul>
+              <li>We’re running out of addresses for all computers</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Current version of addresses is IPv4</li>
+      <li>Moving towards IPv6
+        <ul>
+          <li>Uses 128 bits, yielding 2<sup>128</sup> possible addresses</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>How do you find your IP address?</li>
+  <li>
+    <p>On a Mac, go to system preferences an poke around a bit</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/mac.png" alt="mac" /></p>
+  </li>
+  <li>Private addresses exist
+    <ul>
+      <li>10.#.#.#, 192.168.#.#, or 172.16.#.#</li>
+      <li>Only with special configuration can someone talk to your computer</li>
+      <li>Your personal device is not a server, so people should not need to access them directly
+        <ul>
+          <li>Your device needs to request data from servers</li>
+        </ul>
+      </li>
+      <li>Even email is stored on a server such as Gmail and your device makes a request to that server to access that email</li>
+    </ul>
+  </li>
+  <li>
+    <p>Looking at advanced settings…</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/macadv.png" alt="mac ethernet settings" /></p>
+    <ul>
+      <li>Subnet mask is used to decide if another computer is on the same network</li>
+      <li>Router (aka Gateway) has its own address
+        <ul>
+          <li>Routs data in different directions</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>On windows:</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/windows.png" alt="windows" /></p>
+    <ul>
+      <li>Shows DNS servers as well</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="routers">Routers</h2>
+
+<ul>
+  <li>Routers have bunches if wires coming and going out of them
+    <ul>
+      <li>They have a big table with IP addresses and where data should be routed to get to that destination
+        <ul>
+          <li>Often, the data is routed to some next router</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Routers purpose is to send data in the direction of a destination
+    <ul>
+      <li>The next router will send it to another until it reaches a destination</li>
+    </ul>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/network.png" alt="network" /></p>
+  </li>
+  <li>The internet is a network of networks (with their own routers) that was designed to be scalable. Scalability is the capacity for the system to change in size and scale to meet new demands.
+    <ul>
+      <li>Often multiple ways to go from A to B to create a more fault-tolerant system, this is called network redundancy.
+        <ul>
+          <li>Based in US Military logic to prevent downtime if a particular router goes down</li>
+          <li>When multiple packets are sent, like cat.jpg from Google, they can each take a different path, still getting to their destination eventually
+            <ul>
+              <li>Sometimes the internet is busy and the quickest path changes</li>
+            </ul>
+          </li>
+          <li>Having multiple paths from A to B</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="traceroute">Traceroute</h2>
+
+<ul>
+  <li>How long does it take for this process of data transfer to take on the internet?</li>
+  <li>Traceroute is a program that sends packets to each router on a path to a destination, reporting the time it takes to reach that router</li>
+  <li>
+    <p>From Sanders Theatre to Google.com:</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/traceroutegoogle.png" alt="traceroute Google" /></p>
+    <ul>
+      <li>1-2: A few unnamed routers at Harvard</li>
+      <li>3-4: More Harvard routers</li>
+      <li>5-6: Level3 is a ISP</li>
+      <li>7+: The routers are denying the request</li>
+    </ul>
+  </li>
+  <li>
+    <p>From Sanders Theatre to Berkeley.edu</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/tracerouteberkeley.png" alt="traceroute Berkeley" /></p>
+    <ul>
+      <li>6: Northern Crossroads</li>
+      <li>7-14: A fast connection
+        <ul>
+          <li>8-9: Chicago</li>
+          <li>10-11: Denver</li>
+          <li>12-13: Las Vegas</li>
+          <li>14: Los Angeles</li>
+        </ul>
+      </li>
+      <li>19 is where it arrives at Berkeley in 80 ms!</li>
+    </ul>
+  </li>
+  <li>
+    <p>From Sanders Theatre to MIT.edu</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/traceroutemit.png" alt="traceroute MIT" /></p>
+    <ul>
+      <li>6-7: Goes to New York connectivity</li>
+      <li>8: MIT’s website is outsourced to Akamai’s NYC servers</li>
+    </ul>
+  </li>
+  <li>
+    <p>From Sanders Theatre to CNN.jp</p>
+
+    <p><img src="/curriculum/understanding_technology/internet/notes/traceroutejp.png" alt="traceroute Japan" /></p>
+    <ul>
+      <li>9-10 jumps from Seattle to Osaka past an ocean!
+        <ul>
+          <li>Using undersea cabling</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="undersea-cabling">Undersea Cabling</h2>
+
+<ul>
+  <li>David shows a video about undersea cables</li>
+</ul>
+
+<h2 id="cable-modem-demo">Cable Modem Demo</h2>
+
+<ul>
+  <li>David examines a home cable modem, focusing on its ports
+    <ul>
+      <li>Coaxial cable to plug into the wall</li>
+      <li>Phone jacks (RJ11) as many services are bundled together these days</li>
+      <li>Four jacks for ethernet cables (RJ45)
+        <ul>
+          <li>Devices can plug into these for internet connectivity</li>
+        </ul>
+      </li>
+      <li>This modem has wifi support built in</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="network-switch-demo">Network Switch Demo</h2>
+
+<ul>
+  <li>David examines a network switch
+    <ul>
+      <li>A device that you can plug into your router to allow more connections for all your other devices</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="home-router-demo">Home Router Demo</h2>
+
+<ul>
+  <li>David examines a home router</li>
+  <li>Home routers can have wifi, firewall, and switching capabilities</li>
+</ul>
+
+<h2 id="network-cable-demo">Network Cable Demo</h2>
+
+<ul>
+  <li>David cuts open a network ethernet cable to examine its inner workings</li>
+  <li>Inside a network cable are 8 wires of different colors
+    <ul>
+      <li>Some are for transmitting data, others for receiving data</li>
+      <li>Others still are for insulation and cancellation of interference</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ap-csp-terminology">AP CSP Terminology</h2>
+
+<ul>
+  <li><strong>Computing device</strong>: a physical artifact that can run a program</li>
+  <li><strong>Computing system</strong>: a group of computing devices and programs working together for a common purpose</li>
+  <li><strong>Computing network</strong>: a computing system that contains a group of interconnected computing devices capable of sending and receiving data.</li>
+  <li><strong>Path</strong>: a sequence of directly connected computing devices that begins and ends at the receiver.</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

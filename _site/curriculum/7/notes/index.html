@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Lecture 7">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Lecture 7</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="lecture-7">Lecture 7</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#last-time" id="markdown-toc-last-time">Last time</a></li>
+  <li><a href="#flask" id="markdown-toc-flask">Flask</a></li>
+  <li><a href="#words" id="markdown-toc-words">Words</a></li>
+</ul>
+
+<h2 id="last-time">Last time</h2>
+
+<ul>
+  <li>Last time, we learned about Python, a programming language that comes with many features and libraries. Today, we’ll use Python to generate HTML for webpages, and see how separations of concerns might be applied.</li>
+  <li>A few weeks ago, we learned about web requests in HTTP, which might look like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: www.example.com
+...
+</code></pre></div>    </div>
+    <ul>
+      <li>Hopefully, a server responds with something like:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Content-Type: text/html
+...
+</code></pre></div>        </div>
+        <ul>
+          <li>The <code class="language-plaintext highlighter-rouge">...</code> is the actual HTML of the page.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="flask">Flask</h2>
+
+<ul>
+  <li>Today, we’ll use Flask, a microframework, or a set of code that allows us to build programs without writing shared or repeated code over and over. (Bootstrap, for example, is a framework for CSS.)</li>
+  <li>Flask is written in Python and is a set of libraries of code that we can use to write a web server in Python.</li>
+  <li>One methodology for organizing web server code is MVC, or Model-View-Controller:<br />
+<img src="/curriculum/7/notes/mvc.png" alt="request (HTTP, CLI, etc.) from a client goes into a Controller, which demands from a Model (Database, WS, etc) and receives data that it then sends to a View (Templates, layout) which are sent back to the client as a response (HTML, RSS, XML, JSON, etc.)" />
+    <ul>
+      <li>Thus far, the programs we’ve written have all been in the Controller category, whereby we have logic and algorithms that solve some problem and print output to the terminal. But with web programming, we also want to add formatting and aesthetics (the View component), and also access data in a more organized way (the Model component). When we start writing our web server’s code in Python, most of the logic will be in the controllers.</li>
+      <li>By organizing our program this way, we can have separation of concerns.</li>
+    </ul>
+  </li>
+  <li>Today, we’ll build a website where students can fill out a form to register for Frosh IMs, freshman year intramural sports.</li>
+  <li>We can start by opening the CS50 IDE, and write some Python code that is a simple web server program, <code class="language-plaintext highlighter-rouge">serve.py</code>:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+
+<span class="k">class</span> <span class="nc">HTTPServer_RequestHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">"Content-type"</span><span class="p">,</span> <span class="s">"text/html"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">end_headers</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;!DOCTYPE html&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;html lang='en'&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;head&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;title&gt;hello, title&lt;/title&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;/head&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;body&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"hello, body"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;/body&gt;"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">"&lt;/html&gt;"</span><span class="p">)</span>
+
+
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span>
+<span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+<span class="n">httpd</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">HTTPServer_RequestHandler</span><span class="p">)</span>
+
+<span class="n">httpd</span><span class="p">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We already know how to write a hello, world HTML page, but now we’re writing a program in Python to actually generate and return an HTML page.</li>
+      <li>Most of this code is based on the <code class="language-plaintext highlighter-rouge">http</code> library that we can import that handles the HTTP layer, but we have written our own <code class="language-plaintext highlighter-rouge">do_GET</code> function that will be called every time we receive a GET request. As usual, we need to look at the documentation for the library to get a sense of what we should write, and what we have available for us. First, we send a 200 status code, and send the HTTP header indicating that this is an HTML page. Then, we write (as ASCII bytes) some HTML, line by line, into the response.</li>
+      <li>Notice that we set the server to use port 8080 (since the IDE itself is using port 80), and actually create and start the server (based on documentation we found online).</li>
+      <li>Now, if we run <code class="language-plaintext highlighter-rouge">python serve.py</code>, we can click CS50 IDE &gt; Web Server, which will open our IDE’s web server in another tab for us, and we’ll see the hello, world page we just wrote.</li>
+    </ul>
+  </li>
+  <li>We can see that reimplementing many common functions of a web server can get tedious, even with an HTTP library, so a framework like Flask helps a lot in providing abstractions and shortcuts that we can reuse.</li>
+  <li>With Flask, we can write the following in an <code class="language-plaintext highlighter-rouge">application.py</code> file:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">"hello, world"</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>With <code class="language-plaintext highlighter-rouge">app = Flask(__name__)</code>, we initialize a Flask application for our <code class="language-plaintext highlighter-rouge">application.py</code> file. Then, we use the <code class="language-plaintext highlighter-rouge">@app.route("/")</code> syntax to indicate that the function below will respond to any requests for <code class="language-plaintext highlighter-rouge">/</code>, or the root page of our site. We call that function <code class="language-plaintext highlighter-rouge">index</code> by convention, and it will just return “hello, world” as the response, without any HTML.</li>
+      <li>Now, we can call <code class="language-plaintext highlighter-rouge">flask run</code> from the terminal in the same folder as our <code class="language-plaintext highlighter-rouge">application.py</code>, and the resulting URL will show a page that reads “hello, world” (which our browser displays even without HTML).</li>
+    </ul>
+  </li>
+  <li>We can change the <code class="language-plaintext highlighter-rouge">index</code> function to return a template, or a file that has HTML that we’ve written, that acts as the View.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return render_template("index.html")
+</code></pre></div>    </div>
+    <ul>
+      <li>In a <code class="language-plaintext highlighter-rouge">templates</code> folder, we’ll have an <code class="language-plaintext highlighter-rouge">index.html</code> file with the following:
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"initial-scale=1, width=device-width"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>hello<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        hello, 
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>We see a new feature, ``, like a placeholder. So we’ll go back and change the logic of <code class="language-plaintext highlighter-rouge">index</code>, our controller, to check for parameters in the URL and pass them to the view:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return render_template("index.html", name=request.args.get("name", "world"))
+</code></pre></div>        </div>
+        <ul>
+          <li>We use <code class="language-plaintext highlighter-rouge">request.args.get</code> to get a parameter from the request’s URL called <code class="language-plaintext highlighter-rouge">name</code>. (The second argument, <code class="language-plaintext highlighter-rouge">world</code>, will be the default value that’s returned if one wasn’t set.) Now, we can visit <code class="language-plaintext highlighter-rouge">/?name=David</code> to see “hello, David” on the page. Now, we can generate an infinite number of webpages, even though we’ve only written a few lines of code.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>In <code class="language-plaintext highlighter-rouge">froshims0</code>, we can write an <code class="language-plaintext highlighter-rouge">application.py</code> that can receive and respond to a POST request from a form:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/register"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"dorm"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"failure.html"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"success.html"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>For the default page, we’ll return an <code class="language-plaintext highlighter-rouge">index.html</code> that contains a form:
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+{% extends "layout.html" %}
+
+{% block body %}
+    <span class="nt">&lt;h1&gt;</span>Register for Frosh IMs<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/register"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">autocomplete=</span><span class="s">"off"</span> <span class="na">autofocus</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Name"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">"dorm"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">disabled</span> <span class="na">selected</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>Dorm<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Apley Court"</span><span class="nt">&gt;</span>Apley Court<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Canaday"</span><span class="nt">&gt;</span>Canaday<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Grays"</span><span class="nt">&gt;</span>Grays<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Greenough"</span><span class="nt">&gt;</span>Greenough<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Hollis"</span><span class="nt">&gt;</span>Hollis<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Holworthy"</span><span class="nt">&gt;</span>Holworthy<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Hurlbut"</span><span class="nt">&gt;</span>Hurlbut<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Lionel"</span><span class="nt">&gt;</span>Lionel<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Matthews"</span><span class="nt">&gt;</span>Matthews<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Mower"</span><span class="nt">&gt;</span>Mower<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Pennypacker"</span><span class="nt">&gt;</span>Pennypacker<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Stoughton"</span><span class="nt">&gt;</span>Stoughton<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Straus"</span><span class="nt">&gt;</span>Straus<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Thayer"</span><span class="nt">&gt;</span>Thayer<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Weld"</span><span class="nt">&gt;</span>Weld<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Wigglesworth"</span><span class="nt">&gt;</span>Wigglesworth<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;/select&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Register"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+{% endblock %}
+    
+</code></pre></div>        </div>
+        <ul>
+          <li>We have an HTML form, with an <code class="language-plaintext highlighter-rouge">input</code> tag for a student to type in their name, and a <code class="language-plaintext highlighter-rouge">select</code> tag to create a dropdown list for them to select a dorm. Our form will be submitted to a route we call <code class="language-plaintext highlighter-rouge">/register</code>, and we’ll use the POST method to send the form’s information.</li>
+          <li>Notice that our template is now using a new feature, <code class="language-plaintext highlighter-rouge">extends</code>, to define blocks that will be substituted themselves in another file, <code class="language-plaintext highlighter-rouge">layout.html</code>:
+            <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"initial-scale=1, width=device-width"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>froshims0<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        {% block body %}{% endblock %}
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+      
+</code></pre></div>            </div>
+            <ul>
+              <li>Now, if we have other pages on our site, they can easily share the common markup we would want on every page. The <code class="language-plaintext highlighter-rouge">{% block body %}{% endblock %}</code> syntax is a placeholder block in Flask, where other pages, like <code class="language-plaintext highlighter-rouge">index.html</code>, can provide HTML that will be substituted into that block.</li>
+            </ul>
+          </li>
+          <li>In our <code class="language-plaintext highlighter-rouge">register</code> function, we’ll indicate that we’re listening for a POST request, and inside the function, just make sure that we got a value for both <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">dorm</code>. <code class="language-plaintext highlighter-rouge">request.form</code> is an abstraction provided by Flask, such that we can access the arguments, or parameters, from the request’s POST data.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>When we run our application with <code class="language-plaintext highlighter-rouge">flask run</code>, and visit the URL, sometimes we might see an Internal Server Error. And if we come back to our terminal, where our Flask server is running, we’ll see an error message that provides us clues to what went wrong. We can press Control+C to stop our web server, make changes that will hopefully fix our error, and start our web server again. And even if nothing is broken but we made a change, sometimes we need to quit Flask and start it again, for it to notice those changes.</li>
+  <li>We also need a <code class="language-plaintext highlighter-rouge">success.html</code> and <code class="language-plaintext highlighter-rouge">failure.html</code> in our <code class="language-plaintext highlighter-rouge">templates</code> directory, which might look like:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  
+{% extends "layout.html" %}
+
+{% block body %}
+    You are registered! (Well, not really.)
+{% endblock %}
+  
+</code></pre></div>    </div>
+    <ul>
+      <li>Our <code class="language-plaintext highlighter-rouge">register</code> function will return that, with the template fully rendered, if we provided both a name and dorm in the form.</li>
+      <li>With <code class="language-plaintext highlighter-rouge">layout.html</code>, we didn’t need to copy and paste the same <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> and other shared markup, making it easier for us to make changes across all the pages we have at once.</li>
+    </ul>
+  </li>
+  <li>The failure page, too, will share the same layout but send a different message:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  
+{% extends "layout.html" %}
+
+{% block body %}
+    You must provide your name and dorm!
+{% endblock %}
+  
+</code></pre></div>    </div>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">{% %}</code> syntax is actually called Jinja, a templating language that Flask is able to understand and put together.</li>
+    </ul>
+  </li>
+  <li>And all of this Python code lives on our server in the CS50 IDE, generating a completed HTML page each time and sending it to the browser as a response. We can see that by right-clicking the page in Chrome, clicking View Source, and seeing the full HTML that users will get.</li>
+  <li>Now let’s actually do something with the submitted form information. In <code class="language-plaintext highlighter-rouge">froshims1/application.py</code>, we’ll create a list to store all the registered students:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="c1"># Configure app
+</span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="c1"># Registered students
+</span><span class="n">students</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/registrants"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">registrants</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"registered.html"</span><span class="p">,</span> <span class="n">students</span><span class="o">=</span><span class="n">students</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/register"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+    <span class="n">dorm</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"dorm"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dorm</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"failure.html"</span><span class="p">)</span>
+    <span class="n">students</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> from </span><span class="si">{</span><span class="n">dorm</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">"/registrants"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We create an empty list, <code class="language-plaintext highlighter-rouge">students = []</code>, and when we get a name and dorm in <code class="language-plaintext highlighter-rouge">register</code>, we’ll use <code class="language-plaintext highlighter-rouge">students.append(f"{name} from {dorm}")</code> to add a formatted string with that name and dorm, to the <code class="language-plaintext highlighter-rouge">students</code> list.</li>
+      <li>In the <code class="language-plaintext highlighter-rouge">registrants</code> function, we’ll pass in our <code class="language-plaintext highlighter-rouge">students</code> list to the template of <code class="language-plaintext highlighter-rouge">registered.html</code>:
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+{% extends "layout.html" %}
+
+{% block body %}
+    <span class="nt">&lt;ul&gt;</span>
+        {% for student in students %}
+            <span class="nt">&lt;li&gt;</span>{{ student }}<span class="nt">&lt;/li&gt;</span>
+        {% endfor %}
+    <span class="nt">&lt;/ul&gt;</span>
+{% endblock %}
+    
+</code></pre></div>        </div>
+        <ul>
+          <li>Notice that, with Jinja, we can have simple concepts like a <code class="language-plaintext highlighter-rouge">for</code> loop to generate HTML based on variables passed into the template. (We need an <code class="language-plaintext highlighter-rouge">endfor</code> since, in HTML, indentation is only needed for stylistic purposes, so we need to specify when a loop ends.) Here, we’re creating an <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code> for each <code class="language-plaintext highlighter-rouge">student</code>, or string, in the <code class="language-plaintext highlighter-rouge">students</code> variable that was passed in by the controller, <code class="language-plaintext highlighter-rouge">application.py</code>. And notice that the markup, or formatting of the list, is in this template, or view.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>If we stop our server, and restart it, we’ll have lost all of the data we’ve collected, since the <code class="language-plaintext highlighter-rouge">students</code> variable is only created and stored as long as our program is running.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">froshims2/application.py</code>, we use a new library:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="c1"># Configure app
+</span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/register"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"email"</span><span class="p">)</span>
+    <span class="n">dorm</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"dorm"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">email</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dorm</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"failure.html"</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s">"You are registered!"</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="p">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s">"smtp.gmail.com"</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">starttls</span><span class="p">()</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="s">"jharvard@cs50.net"</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"PASSWORD"</span><span class="p">))</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sendmail</span><span class="p">(</span><span class="s">"jharvard@cs50.net"</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"success.html"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>The SMTP (Simple Mail Transfer Protocol) library allows us to use abstractions for sending email, and here, every time we get a valid form, we’ll send an email. By reading the documentation for <code class="language-plaintext highlighter-rouge">smtplib</code> and for Gmail, we can figure out the lines of code needed to log in to Gmail’s server programmatically, and send an email to the email address from our form.</li>
+    </ul>
+  </li>
+  <li>We can also save the registration data to a CSV on our server, which can then be opened even after our server is stopped:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/register"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"dorm"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"failure.html"</span><span class="p">)</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"registered.csv"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">((</span><span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span> <span class="n">request</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"dorm"</span><span class="p">)))</span>
+    <span class="nb">file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"success.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/registered"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">registered</span><span class="p">():</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"registered.csv"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="n">students</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"registered.html"</span><span class="p">,</span> <span class="n">students</span><span class="o">=</span><span class="n">students</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>We import the <code class="language-plaintext highlighter-rouge">csv</code> library, and open a file called <code class="language-plaintext highlighter-rouge">registered.csv</code> to append or read from. If we received a form in the <code class="language-plaintext highlighter-rouge">register</code> route, we’ll open the file with <code class="language-plaintext highlighter-rouge">a</code>, to append. Then, we create a <code class="language-plaintext highlighter-rouge">csv.writer</code> (based on the documentation for the library), and use the <code class="language-plaintext highlighter-rouge">writerow</code> function to write the name and dorm to the file. Finally, we’ll close the file.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">registered</code> route will open the file for reading, and create a list of lists based on the file. Then, in <code class="language-plaintext highlighter-rouge">registered.html</code>, we can iterate over each list in the list (each row), and print the first item (the name) and the second item (the dorm):
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+{% extends "layout.html" %}
+
+{% block body %}
+    <span class="nt">&lt;h1&gt;</span>Registered<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+        {% for student in students %}
+            <span class="nt">&lt;li&gt;</span>{{ student[0] }} from {{ student[1] }}<span class="nt">&lt;/li&gt;</span>
+        {% endfor %}
+    <span class="nt">&lt;/ul&gt;</span>
+{% endblock %}
+    
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>With a language we’ll look at next week, SQL, we’ll be able to work with data more easily than we can with a CSV file.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">froshims6/templates/index.html</code>, we use JavaScript in our template to check the input immediately:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  
+{% extends "layout.html" %}
+
+{% block body %}
+    <span class="nt">&lt;h1&gt;</span>Register for Frosh IMs<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/register"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">autocomplete=</span><span class="s">"off"</span> <span class="na">autofocus</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Name"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">"dorm"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">disabled</span> <span class="na">selected</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>Dorm<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Apley Court"</span><span class="nt">&gt;</span>Apley Court<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Canaday"</span><span class="nt">&gt;</span>Canaday<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Grays"</span><span class="nt">&gt;</span>Grays<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Greenough"</span><span class="nt">&gt;</span>Greenough<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Hollis"</span><span class="nt">&gt;</span>Hollis<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Holworthy"</span><span class="nt">&gt;</span>Holworthy<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Hurlbut"</span><span class="nt">&gt;</span>Hurlbut<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Lionel"</span><span class="nt">&gt;</span>Lionel<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Matthews"</span><span class="nt">&gt;</span>Matthews<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Mower"</span><span class="nt">&gt;</span>Mower<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Pennypacker"</span><span class="nt">&gt;</span>Pennypacker<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Stoughton"</span><span class="nt">&gt;</span>Stoughton<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Straus"</span><span class="nt">&gt;</span>Straus<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Thayer"</span><span class="nt">&gt;</span>Thayer<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Weld"</span><span class="nt">&gt;</span>Weld<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"Wigglesworth"</span><span class="nt">&gt;</span>Wigglesworth<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;/select&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Register"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+
+    <span class="nt">&lt;script&gt;</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">).</span><span class="nx">onsubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">You must provide your name!</span><span class="dl">'</span><span class="p">);</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">You must provide your dorm!</span><span class="dl">'</span><span class="p">);</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">};</span>
+
+    <span class="nt">&lt;/script&gt;</span>
+
+{% endblock %}
+  
+</code></pre></div>    </div>
+    <ul>
+      <li>With JavaScript on the page, the user can get feedback immediately since it runs in the browser. And we should still validate the input on our server, since someone might disable JavaScript or try to send bad requests programmatically. With libraries like Bootstrap, we can make validation pretty and really improve a user’s experience, or UX.</li>
+      <li>In this example, we have a function that will be called when the <code class="language-plaintext highlighter-rouge">form</code> on the page is submitted, and checks that there’s a value for both the <code class="language-plaintext highlighter-rouge">input</code> and the <code class="language-plaintext highlighter-rouge">select</code>. If there is no value for one of them, we’ll create an alert and <code class="language-plaintext highlighter-rouge">return fallse</code> to stop the form from being submitted. Otherwise, our function will <code class="language-plaintext highlighter-rouge">return true</code> if both are present, allowing the form to be submitted by the browser.</li>
+      <li>We could also factor out the JavaScript code into a <code class="language-plaintext highlighter-rouge">.js</code> file and include it, but since we don’t have very many lines of code yet, we can make a design decision to include our JavaScript code directly in our template. Frameworks like React will organize view code, like the HTML and JavaScript, in particular ways, so that we can maintain consistent patterns in more complicated web applications.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="words">Words</h2>
+
+<ul>
+  <li>Let’s create a website where someone can search for words that start with some string, much like how we might want to have autocomplete. We’ll need a file called <code class="language-plaintext highlighter-rouge">large</code> that’s a list of dictionary words, and in <code class="language-plaintext highlighter-rouge">words0/application.py</code> we’ll have:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">WORDS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"large"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">WORDS</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">rstrip</span><span class="p">())</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/search"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">WORDS</span> <span class="k">if</span> <span class="n">word</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"q"</span><span class="p">))]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">"search.html"</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">words</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>When our server starts, we’ll create a <code class="language-plaintext highlighter-rouge">WORDS</code> list from reading in each line of the <code class="language-plaintext highlighter-rouge">large</code> file, removing the new line with <code class="language-plaintext highlighter-rouge">rstrip</code>, and storing that in our list.</li>
+      <li>In our <code class="language-plaintext highlighter-rouge">index</code> function, we’ll render <code class="language-plaintext highlighter-rouge">index.html</code>, which is just a form:
+        <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+{% extends "layout.html" %}
+
+{% block body %}
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/search"</span> <span class="na">method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">autocomplete=</span><span class="s">"off"</span> <span class="na">autofocus</span> <span class="na">name=</span><span class="s">"q"</span> <span class="na">placeholder=</span><span class="s">"Query"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+{% endblock %}
+    
+</code></pre></div>        </div>
+        <ul>
+          <li>Our form will use the <code class="language-plaintext highlighter-rouge">get</code> method, since we want the query to be in the URL.</li>
+        </ul>
+      </li>
+      <li>In our <code class="language-plaintext highlighter-rouge">search</code> route, we create a list, <code class="language-plaintext highlighter-rouge">words</code>, which is a list of every <code class="language-plaintext highlighter-rouge">word</code> in our global <code class="language-plaintext highlighter-rouge">WORDS</code> list (that we read in earlier) that start with the value of the parameter <code class="language-plaintext highlighter-rouge">q</code>. It’s equivalent to:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"q"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">WORDS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+        <span class="n">words</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</code></pre></div>        </div>
+        <ul>
+          <li>Once we have a list of words that match, we’ll pass it to our template, <code class="language-plaintext highlighter-rouge">search.html</code> that will display each one with markup.</li>
+        </ul>
+      </li>
+      <li>We can run our server with <code class="language-plaintext highlighter-rouge">flask run</code>, and when we visit the URL, we see a form that we can type some input into. If we type in the letter <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">b</code>, we can click submit and be taken to a page with all the words in our dictionary that start with <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">b</code>. And we notice that our route is something like <code class="language-plaintext highlighter-rouge">/search?q=a</code>, though we could have changed <code class="language-plaintext highlighter-rouge">q</code> (for query) to anything we’d like. We can even change the URL with some other value for <code class="language-plaintext highlighter-rouge">q</code>, and see our results displayed.</li>
+    </ul>
+  </li>
+  <li>In <code class="language-plaintext highlighter-rouge">words1</code>, we’ll get the results list immediately with JavaScript. And we can infer how that example works, before looking at the code, by running it in the IDE. We can visit the URL, and use the Network tab in Developer Tools by right-clicking the page in Chrome:
+<img src="/curriculum/7/notes/words1.png" alt="words1 with input box on page and results directly below; Network panel in Developer tools shows a request to search?q=a" />
+    <ul>
+      <li>We see that our browser is making a request every time we type into the input box, and if we click on the request and then Response, we can see that our browser got some fragment of HTML with our results.</li>
+    </ul>
+  </li>
+  <li>We can click on View Source on the page, and see that our page has a bit of JavaScript after the HTML:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">autocomplete=</span><span class="s">"off"</span> <span class="na">autofocus</span> <span class="na">placeholder=</span><span class="s">"Query"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;ul&gt;&lt;/ul&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.3.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+
+    <span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/search?q=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">};</span>
+
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>Here, we’re using a JavaScript library called jQuery, which provides us with some abstractions. We’re selecting the <code class="language-plaintext highlighter-rouge">input</code> element, and every time the <code class="language-plaintext highlighter-rouge">keyup</code> event occurs, we want to change the page. The <code class="language-plaintext highlighter-rouge">keyup</code> event will happen when we press a key in the input box, and let go. We use jQuery’s <code class="language-plaintext highlighter-rouge">$.get</code> function to make a GET request to our server at the <code class="language-plaintext highlighter-rouge">/search?q=</code> route, with the value of the input box appended. When we get some <code class="language-plaintext highlighter-rouge">data</code> back, the <code class="language-plaintext highlighter-rouge">$.get</code> function will call an anonymous function (a callback) to set the <code class="language-plaintext highlighter-rouge">innerHTML</code> of the <code class="language-plaintext highlighter-rouge">ul</code> on our page to that <code class="language-plaintext highlighter-rouge">data</code>.</li>
+      <li>And notice that we provided an empty opened and closed <code class="language-plaintext highlighter-rouge">&lt;ul&gt;</code> element in our template, but we’ll change the HTML inside with what our server responds with.</li>
+    </ul>
+  </li>
+  <li>On our server-side code, our <code class="language-plaintext highlighter-rouge">search</code> route is the mostly the same as before, but the template, <code class="language-plaintext highlighter-rouge">search.html</code>, will only have <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code> elements, one for each matching word:
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  
+{% for word in words %}
+    <span class="nt">&lt;li&gt;</span>{{ word }}<span class="nt">&lt;/li&gt;</span>
+{% endfor %}
+  
+</code></pre></div>    </div>
+    <ul>
+      <li>Since we don’t extend a <code class="language-plaintext highlighter-rouge">layout.html</code>, this route will only return an incomplete fragment of HTML. But that still works because our JavaScript code is putting it inside a complete page, our <code class="language-plaintext highlighter-rouge">index.html</code>.</li>
+    </ul>
+  </li>
+  <li>With <code class="language-plaintext highlighter-rouge">words2</code>, we have our server return data more efficiently, in a format called JSON, JavaScript Object Notation:
+<img src="/curriculum/7/notes/words2.png" alt="words2 with Response to a request for search?q=a as a list of strings, as opposed to li elements with markup" />
+    <ul>
+      <li>Then, in our JavaScript code on the page, we’ll write each of them as an <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code>, generating the markup in the browser instead of on our server.</li>
+      <li>The Python code in <code class="language-plaintext highlighter-rouge">application.py</code> uses a <code class="language-plaintext highlighter-rouge">jsonify</code> function to return a list as a JSON object:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/search"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"q"</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">WORDS</span> <span class="k">if</span> <span class="n">q</span> <span class="ow">and</span> <span class="n">word</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">q</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>And our <code class="language-plaintext highlighter-rouge">index.html</code> has the JavaScript to append each word as an <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code> element:
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/search?q=</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">word</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">word</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/li&gt;</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>In fact, since the browser can run JavaScript that can search a list, we can write all of this in JavaScript, without making a request to a server:
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">word</span> <span class="k">of</span> <span class="nx">WORDS</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">html</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">word</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/li&gt;</span><span class="dl">'</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>When we get input from the user, we’ll just iterate over a <code class="language-plaintext highlighter-rouge">WORDS</code> array and append any <code class="language-plaintext highlighter-rouge">word</code> string that starts with the input’s value to the page as an <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code> element.</li>
+      <li>We’ll also have to include a <code class="language-plaintext highlighter-rouge">large.js</code> file that creates that global variable, <code class="language-plaintext highlighter-rouge">WORDS</code>, which starts with the following:
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">WORDS</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aaa</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aaas</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aachen</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aalborg</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aalesund</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">aardvark</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">...</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Even with a relatively simple example, we see how there can be a few different approaches to solving the same problem. With version 0, our server sent back entire, complete pages on every search. With version 1, we used JavaScript to make requests without navigating to another page, getting back data with markup from the server. With version 2, we used JavaScript, but only got back data from the server, that we then marked up in the browser. Finally, with version 3, we used JavaScript and the word list to accomplish the same results, but all within the browser. Each approach has pros and cons, so depending on what tradeoffs we value, one solution might be better than the rest.</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>

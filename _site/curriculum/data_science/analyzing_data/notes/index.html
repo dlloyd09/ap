@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <meta property="og:image" content="">
+
+        <meta property="og:title" content="Ananlyzing Data">
+
+        <link href="/favicon.ico?1795728864" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="/assets/jquery/dist/jquery.min.js?1795728864"></script>
+        <script src="/assets/bootstrap/dist/js/bootstrap.bundle.min.js?1795728864"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="/assets/bootstrap-table/dist/bootstrap-table.min.css?1795728864" rel="stylesheet">
+        <script src="/assets/bootstrap-table/dist/bootstrap-table.min.js?1795728864"></script>
+        <script src="/assets/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js?1795728864"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <!-- cs50.fontawesome: "self-hosted" loads CS50's self-hosted Font Awesome Pro (the site's domain must be
+             allowlisted in cs50/font-awesome); a Font Awesome kit ID loads that kit; unset loads Font Awesome Free. -->
+        
+        <link href="/assets/@fortawesome/fontawesome-free/css/all.min.css?1795728864" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="/assets/luxon/build/global/luxon.min.js?1795728864"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="/assets/mathjax/tex-mml-chtml.js?1795728864"></script>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="/assets/vanilla-lazyload/dist/lazyload.min.js?1795728864"></script>
+
+        <!-- https://iframe-resizer.com/ -->
+        <script src="/assets/@iframe-resizer/parent/index.umd.js?1795728864"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="/assets/scratchblocks.min.js?1795728864"></script>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="/assets/mermaid/dist/mermaid.min.js?1795728864"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="/assets/@twemoji/api/dist/twemoji.min.js?1795728864"></script>
+
+        
+
+        <link href="/assets/page.css?1795728864" rel="stylesheet">
+        <script src="/assets/jekyll-theme-cs50.js?1795728864"></script>
+
+        <script>
+            window.CS50 = {
+                local: null,
+                locale: null,
+                tz: null
+            };
+        </script>
+
+        <title>Ananlyzing Data</title>
+
+
+    </head>
+
+    <body class="invisible">
+
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg">
+ 
+                    <header><h1 data-id="cs50-ap"><a href="/">CS50 AP</a></h1>
+
+<p>Harvard University<br />
+2026 - 2027</p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside > nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr />
+
+<ul>
+  <li><a href="cs50.dev">CS50 IDE</a></li>
+  <li><a href="manual.cs50.io">CS50 Programmer’s Manual</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="https://cs50.statuspage.io/">Status Page</a></li>
+  <li><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><a href="/curriculum/1"><strong>Week 1</strong></a></li>
+  <li><a href="/tools">Tools</a></li>
+  <li><a href="/syllabus">Syllabus</a></li>
+</ul></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg">
+
+                    <h1 class="no_toc" id="ananlyzing-data">Ananlyzing Data</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#preprocessing-data" id="markdown-toc-preprocessing-data">Preprocessing Data</a>    <ul>
+      <li><a href="#1-cleaning-data" id="markdown-toc-1-cleaning-data">1. Cleaning data</a></li>
+      <li><a href="#2-incomplete-or-missing-data" id="markdown-toc-2-incomplete-or-missing-data">2. Incomplete or missing data</a></li>
+      <li><a href="#3-invalid-data" id="markdown-toc-3-invalid-data">3. Invalid data</a></li>
+      <li><a href="#4-combining-data-sources" id="markdown-toc-4-combining-data-sources">4. Combining data sources</a></li>
+    </ul>
+  </li>
+  <li><a href="#extracting-information" id="markdown-toc-extracting-information">Extracting Information</a></li>
+  <li><a href="#data-visualizations" id="markdown-toc-data-visualizations">Data Visualizations</a></li>
+</ul>
+
+<h2 id="preprocessing-data">Preprocessing Data</h2>
+
+<p>When working with data, it is likely that we’ll have to manipulate it or preprocess it in some way before we’re able to analyze it. Over time humans have developed different methods to analyze data varying in ease of use. One such example is manipulating data in an Excel spreadsheet or Google Sheet versus manipulating data in a database textually with a language like SQL. Ultimately, the choice is yours on which tool you’re comfortable using for the most part. When we start looking at larger data sets, we’ll also need to consider which tools can handle that data sets of that scale.</p>
+
+<p>Let’s say we want to articles submitted to a scholarly journal to get published. Well we may want to programmatically iterate over their abstracts to get a sense of what words or topics occur most frequently. We’ll need to consider a few things before we can start analyzing.</p>
+
+<h4 id="1-cleaning-data">1. Cleaning data</h4>
+<ul>
+  <li>If we are trying to get a sense of topic-based words we’ll need to get rid of some words that are irrelevant like “the”, “of”, “it”, etc. These are referred to as “stop words”.</li>
+</ul>
+
+<p><img src="/curriculum/data_science/analyzing_data/notes/top_100_words.jpg" alt="top 100 words" /></p>
+
+<ul>
+  <li>We also might want to consider treating capitalized words the same as their lowercased equivalents. This step can vary based on how the data is collected. Are users selecting items from a drop down menu or multiple choice? Or are they writing answers in an open field?</li>
+  <li>If we really wanted to be fancy we could lemmatize the data set, which means we would only be working with root words. Words like “run”, “ran”, “runs”, and “running” would all count as the same word.</li>
+  <li>These methods allow all of our data to be uniform so that it is easier to analyze, without changing the primary data.</li>
+  <li>It is likely that we won’t catch all the aspects of our data that needs to be cleaned in our first pass. After we start analyzing we may see patterns we want to eliminate or explore further. We can iteratively clean our data throughout this process to make sure we are analyzing uniform data.</li>
+</ul>
+
+<h4 id="2-incomplete-or-missing-data">2. Incomplete or missing data</h4>
+<ul>
+  <li>If we’re analyzing abstracts, how do we handle papers that have incomplete or missing abstracts?</li>
+  <li>Do we eliminate all papers without abstracts from our sample? Do we use a sample from the paper itself? It is ultimately up to you, the programmer, to decide this.</li>
+  <li>Be sure to be consistent with how you handle these data points!</li>
+</ul>
+
+<h4 id="3-invalid-data">3. Invalid data</h4>
+<ul>
+  <li>Our data set could contain words of different languages using special symbols that our programming environment may not be able to display.</li>
+  <li>In some programming environments, these characters may be represented as their Unicode equivalent. How do we handle such words when we analyze them?</li>
+  <li>Do we remove them from our data set? Do we translate them to some English translation?</li>
+  <li>Again, the key is to be consistent!</li>
+</ul>
+
+<h4 id="4-combining-data-sources">4. Combining data sources</h4>
+<ul>
+  <li>In order to find themes across all abstracts, we’ll have to look at all the papers’ abstracts.</li>
+  <li>We may want to copy all the abstracts from the papers into one file to make analysis easier.</li>
+  <li>Additionally, there may be cases were some papers have the abstract included as a separate file as opposed to included in the same file as the entire paper.</li>
+</ul>
+
+<h2 id="extracting-information">Extracting Information</h2>
+
+<p>The raw data we collect from devices will seldom (if ever) tell us what do with it. It is our job to interpret it and make decisions based on those interpretations.</p>
+
+<p>Raw data is a collection of numbers, text, or values. We can collect information, that is the patterns or facts the data presents, by analyzing this data. For example, if our data was a collection of words from an article we could easily extract a fact like what word was used most frequently. If we used more articles from the same author we might find patterns in their writing style that we couldn’t otherwise see in just one document.</p>
+
+<p>Sometimes we want to collect data over a period of time instead of just once. In this way we are able to determine trends over time. Remember our <a href="../../collecting_data/notes/#signals">buoy example</a>?</p>
+
+<p><img src="/curriculum/data_science/analyzing_data/notes/buoys.jpg" alt="buoys" /></p>
+
+<p>It wouldn’t make sense to only collect this data once and be done with it. We could imagine a database that stores all the values of relative distance between the surface buoy and the anchor once every second or 5 times a second if we wanted to be even more precise. Even with all this raw data a computer can’t determine what is normal and what is not. We, as the human, would need to determine a range of values that we consider to be normal, or a baseline.</p>
+
+<p>We could further extrapolate that any value outside of this range might indicate a storm or a tsunami. This is called correlation. We can observe storm like conditions when the relative distance changes dramatically or falls outside of the range we’ve deemed to be “normal”. Correlation does not always imply causation, though, consider other factors that could change a buoy’s relative distance to its anchor, such as animals, humans, or boats.</p>
+
+<p>If we really wanted to confirm our hypothesis that a storm may be on its way we would probably want to use more than one data source, or buoys in this case. That way we can rule out external factors that may be occurring at one location. We could use this network of buoys to gather even more information by programmatically comparing distances of neighboring buoys and taking the average, for example.</p>
+
+<p><img src="/curriculum/data_science/analyzing_data/notes/buoy_network.gif" alt="buoy network" /></p>
+
+<p>Ultimately the size of our data set will determine our conclusions and how confident we are in those conclusions. The larger the sample size, the smaller the margin of error. Imagine we asked 10 people what their favorite color was and all 10 said green. Our results would show that 100% of people chose green as their favorite color, but this would not be true of the population of the earth. If we sampled 1 million people, the distribution of favorite colors may be more representative of the larger population.</p>
+
+<h2 id="data-visualizations">Data Visualizations</h2>
+
+<p>When we look at data over long periods of time, it is often easier to see trends with some sort of visualization. Some examples include charts, diagrams, graphs, and infographics.</p>
+
+<p>To view yearly trends of wave heights in the Pacific, we could take the daily average height for an entire year and manually skim over the data. This is something we’d likely have to do programmatically as our buoys are likely collecting various types of data like water temperature and wind direction so we’ll need to extract wave height. Looking at all these numbers, even just for wave height seems tedious and we might miss overarching trends. Plotting this data on a graph, we can see greater wave height in the winter months than in the summer months.</p>
+
+<p><img src="/curriculum/data_science/analyzing_data/notes/wave_graph.png" alt="wave height graph" /></p>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="/assets/page.js?1795728864"></script>
+
+    </body>
+
+</html>
